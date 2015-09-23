@@ -1,12 +1,12 @@
-# Project Name
+# VacayPay
 
-> Pithy project description
+> Settle later
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Tomio Mizoroki
+  - __Scrum Master__: Ryan Chen
+  - __Development Team Members__: John Anderson, Eugene Lee
 
 ## Table of Contents
 
