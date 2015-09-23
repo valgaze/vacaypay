@@ -1,4 +1,4 @@
-# Project Name #
+# VacaPay #
 
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -17,28 +17,26 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
-
-## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  For friends going on a trip who don't want to worry about splitting expenses. 
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  VacayPay allows users to track their expenses during their trip. Once the trip is done the app will decide what payments need to be made to make sure everyone comes out even.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  Trip expenses can get complicated especially when participants split off and do different activities. For example, not everyone will stay at the same hotel room or eat the same food.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  VacayPay offers an easy and transparent way of deciding how expenses should be split. Expenses are logged and visible to all participants. Calculations are handled automatically.
+
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  VacayPay will save you time and stress and allow you to enjoy your trip without having to think about your expenses.
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  Create an account with us and you can start logging expenses right away when your trip starts. 
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  >"Ever since I started using VacayPay, my friends and I never had a dispute about who paid for what and we all enjoyed our vacation"
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  Sign up now and look forward to your next headache-free vacation!s
