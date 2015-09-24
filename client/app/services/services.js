@@ -13,7 +13,7 @@
 
     function signin (user, callback) {
       console.log(user, ' signed in!');
-      $http.post('/users', {username: user})
+      $http.post('/users/signin', {username: user})
       .then(function (res) {
         console.log('Signed in!');
         callback(res.data.token);
@@ -24,7 +24,7 @@
 
     function signup (user, callback) {
       console.log(user, ' just signed up!');
-      $http.post('/users', {username: user})
+      $http.post('/users/signup', {username: user})
       .then(function (res) {
         console.log('Signed up!');
         callback(res.data.token);
