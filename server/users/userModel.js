@@ -27,7 +27,8 @@ var UserSchema = new Schema({
 	pastTrip: {
 		type: [ObjectId],
 		ref: 'PastTrip'
-	}
+	},
+	salt: String
 });
 
 UserSchema.methods.comparePasswords = function(pw){
