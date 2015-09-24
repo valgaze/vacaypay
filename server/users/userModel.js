@@ -6,7 +6,7 @@ var Q = require('q');
 var SALT_WORK_FACTOR = 10;
 
 var Trip = require('../trips/tripModel.js');
-var PastTrip = require('../trips/pastTripModel');
+var PastTrip = require('../trips/pastTripModel.js');
 
 var Schema = mongoose.Schema;
 

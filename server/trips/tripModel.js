@@ -28,4 +28,4 @@ var TripSchema = new Schema({
 	]
 });
 
-module.exports = mongoose.model('trips', ExpenseSchema);
+module.exports = mongoose.model('trips', Trip);
