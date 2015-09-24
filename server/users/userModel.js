@@ -34,7 +34,7 @@ UserSchema.methods.comparePasswords = function(pw){
 	var defer = Q.defer();
 	var rpw = this.password;
 
-	bcrype.compare(pw, rpw, function(err, auth){
+	bcrypt.compare(pw, rpw, function(err, auth){
 		if(err) defer.reject(err);
 		defer.resolve(auth);
 	});
