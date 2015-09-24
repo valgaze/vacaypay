@@ -21,11 +21,11 @@ var UserSchema = new Schema({
 		required: true
 	},
 	currentTrip: {
-		type: ObjectId,
+		type: Schema.Types.ObjectId,
 		ref: 'Trip'
 	},
 	pastTrip: {
-		type: [ObjectId],
+		type: [Schema.Types.ObjectId],
 		ref: 'PastTrip'
 	},
 	salt: String
