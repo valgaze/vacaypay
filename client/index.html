@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app='proximity'>
+  <head>
+    <meta charset="utf-8" />
+    <title>VacayPay</title>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+    <script src="app/app.js"></script>
+    <script src="app/event/event.js"></script>
+    <script src="app/map/map.js"></script>
+    <script src="app/route-config.js"></script>
+    <script src="app/services/services.js"></script>
+
+
+  </head> 
+  <body>
+    <h1>Proximity</h1>
+
+    <div class="navbar">
+        <ul class="nav">
+          <a ui-sref="map">Overview</a>
+          <a ui-sref="event">New Event</a>
+        </ul>
+    </div>
+
+    <div ui-view></div>
+  </body>
+</html>
