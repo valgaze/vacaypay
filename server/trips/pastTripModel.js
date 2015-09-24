@@ -5,7 +5,7 @@ var User = require('../users/UserModel.js');
 
 var Schema = mongoose.Schema;
 
-var TripSchema = new Schema({
+var PastTripSchema = new Schema({
 	code: {
 		type: String,
 		required: true,
@@ -27,4 +27,4 @@ var TripSchema = new Schema({
 	]
 });
 
-module.exports = mongoose.model('trips', Trip);
+module.exports = mongoose.model('pasttrips', PastTripSchema);
