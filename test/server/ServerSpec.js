@@ -8,11 +8,32 @@ var User = require('../../server/users/userModel.js');
 describe('MongoTests', function() {
 
   beforeEach(function(done) {
-    done();
+    var newUser = {
+      username: 'test',
+      password: '1234'
+    };
+
+    User.create({ username: 'test' }, function(error) {
+      if (error) {
+        console.log('Error creating user: ', error);
+      }
+      done();
+    });
   });
 
-  describe('Account login and signup:', function() {
+  afterEach(function(done) {
+    User.remove({ username: 'test' }, function(error) {
+      if (error) {
+        console.log('Error removing user: ', error);
+      }
+      done();
+    });
+  });
+
+  describe('User creation:', function() {
     
+
+
   });
 
 });
