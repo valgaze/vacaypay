@@ -5,8 +5,10 @@ var bcrypt = require('bcrypt-nodejs');
 var Q = require('q');
 var SALT_WORK_FACTOR = 10;
 
-var Schema = mongoose.Schema;
+var Trip = require('../trips/tripModel.js');
+var PastTrip = require('../trips/pastTripModel');
 
+var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
 	username: {
@@ -17,6 +19,14 @@ var UserSchema = new Schema({
 	password: {
 		type: String,
 		required: true
+	},
+	currentTrip: {
+		type: ObjectId,
+		ref: 'Trip'
+	},
+	pastTrip: {
+		type: [ObjectId],
+		ref: 'PastTrip'
 	}
 });
 

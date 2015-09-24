@@ -2,11 +2,11 @@
 // Reference angular sprint
 var mongoose = require('mongoose');
 var Expenses = require('expenseModel.js');
-var User = require('../users/UserModel.js');
+var User = require('../users/UserModel.js')
 
 var Schema = mongoose.Schema;
 
-var TripSchema = new Schema({
+var PastTripSchema = new Schema({
 	code: {
 		type: String,
 		required: true,
@@ -28,4 +28,4 @@ var TripSchema = new Schema({
 	]
 });
 
-module.exports = mongoose.model('trips', ExpenseSchema);
+module.exports = mongoose.model('pasttrips', PastTripSchema);
