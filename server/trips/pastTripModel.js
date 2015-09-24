@@ -1,8 +1,7 @@
 // Todo Implement and export schema using mongoose
 // Reference angular sprint
 var mongoose = require('mongoose');
-var Expenses = require('expenseModel.js');
-var User = require('../users/UserModel.js')
+var User = require('../users/UserModel.js');
 
 var Schema = mongoose.Schema;
 
