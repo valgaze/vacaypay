@@ -92,7 +92,8 @@ describe('Mongo', function() {
           }
 
           expect(trip.code).to.equal('ABCD');
-          expect(trip.expenses.food).to.equal('food');
+          expect(trip.expenses[0].name).to.equal('food');
+          done();
         });
     });
 
