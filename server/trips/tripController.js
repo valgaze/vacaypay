@@ -4,7 +4,7 @@ module.exports = {
 	// TODO:
 	// Look up the database to find requested users current trip.
 	getCurrentTrip: function(){
-
+		
 	},
 
 	// Create a new trip under the user
