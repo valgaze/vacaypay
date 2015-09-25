@@ -6,6 +6,14 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var TripSchema = new Schema({
+	creator: {
+		type: Schema.Types.ObjectId,
+		ref: 'User'
+	},
+	participants: [{
+		type: Schema.Types.ObjectId,
+		ref: 'User'
+	}],
 	name: {
 		type: String,
 		required: true
@@ -23,7 +31,7 @@ var TripSchema = new Schema({
 				type: Schema.Types.ObjectId,
 				ref: 'User'
 			},
-			stakeholder: [{
+			stakeholders: [{
 				type: Schema.Types.ObjectId,
 				ref: 'User'
 			}],

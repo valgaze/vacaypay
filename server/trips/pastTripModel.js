@@ -6,6 +6,18 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var PastTripSchema = new Schema({
+	creator: {
+		type: Schema.Types.ObjectId,
+		ref: 'User'
+	},
+	participants: [{
+		type: Schema.Types.ObjectId,
+		ref: 'User'
+	}],
+	name: {
+		type: String,
+		required: true
+	},
 	code: {
 		type: String,
 		required: true,
@@ -19,12 +31,23 @@ var PastTripSchema = new Schema({
 				type: Schema.Types.ObjectId,
 				ref: 'User'
 			},
-			stakeholder: [{
+			stakeholders: [{
 				type: Schema.Types.ObjectId,
 				ref: 'User'
 			}],
 		}
-	]
+	],
+	summary: [{
+		payer: {
+			type: Schema.Types.ObjectId,
+			ref: 'User'
+		},
+		payee: {
+			type: Schema.Types.ObjectId,
+			ref: 'User'
+		},
+		amount: Number
+	}]
 });
 
 module.exports = mongoose.model('pasttrips', PastTripSchema);
