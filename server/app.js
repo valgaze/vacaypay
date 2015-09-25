@@ -1,6 +1,10 @@
 var express = require('express');
+var mongoose = require('mongoose');
+var User = require('./users/userModel.js');
 
 var app = express();
+
+mongoose.connect('mongodb://localhost/test');
 
 // routing handled in middleware
 require('./config/middleware.js')(app, express);
