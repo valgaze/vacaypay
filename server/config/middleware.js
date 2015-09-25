@@ -18,4 +18,5 @@ module.exports = function(app, express) {
 
   require('../users/userRoutes.js')(userRouter);
   require('../trips/tripRoutes.js')(tripRouter);
+
 };
