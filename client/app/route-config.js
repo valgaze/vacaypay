@@ -17,6 +17,11 @@
           url: "/signup",
           templateUrl: "app/auth/signup.html",
           controller: 'AuthController'
+      })
+      .state('fallback', {
+          url: "/fallback",
+          templateUrl: "app/fallback/fallback.html",
+          controller: 'FallbackController'
       });
   // We add our $httpInterceptor into the array
   // of interceptors. Think of it like middleware for your ajax calls
