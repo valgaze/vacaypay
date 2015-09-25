@@ -9,19 +9,24 @@
     
     $stateProvider
       .state('signin', {
-          url: "/signin",
-          templateUrl: "app/auth/signin.html",
-          controller: 'AuthController'
+        url: "/signin",
+        templateUrl: "app/auth/signin.html",
+        controller: 'AuthController'
       })
       .state('signup', {
-          url: "/signup",
-          templateUrl: "app/auth/signup.html",
-          controller: 'AuthController'
+        url: "/signup",
+        templateUrl: "app/auth/signup.html",
+        controller: 'AuthController'
       })
       .state('fallback', {
-          url: "/fallback",
-          templateUrl: "app/fallback/fallback.html",
-          controller: 'FallbackController'
+        url: "/fallback",
+        templateUrl: "app/fallback/fallback.html",
+        controller: 'FallbackController'
+      })
+      .state('currentTrip', {
+        url: "/currentTrip",
+        templateUrl: "app/currentTrip/currentTrip.html",
+        controller: 'CurrentTripController'
       });
   // We add our $httpInterceptor into the array
   // of interceptors. Think of it like middleware for your ajax calls

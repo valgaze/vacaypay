@@ -59,10 +59,28 @@
 
   })
   .factory('Trip', function ($http) {
-    function createTrip(trip) {
+    var services = {
+      createTrip: createTrip,
+      hasTrip: hasTrip
+    };
+
+    return services;
+
+    function createTrip(trip, callback) {
+      console.log(trip);
       $http.post('/trips', {
         name: trip.name,
         code: trip.code
+      })
+      .then(function() {
+        callback();
+      });
+    };
+
+    function hasTrip(callback) {
+      $http.get('/trips')
+      .then( function (res) {
+        callback(res.data);
       })
     }
   });
