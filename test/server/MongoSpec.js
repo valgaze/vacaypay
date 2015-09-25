@@ -76,7 +76,11 @@ describe('Mongo', function() {
     it('Should successfully compare original password to hash', function(done) {
       User.findOne({ username: 'test' })
         .exec(function(error, user) {
-          expect(user.comparePasswords('1234')).to.be.true;
+          user.comparePasswords('1234')
+            .then(function(result) {
+              expect(result).to.be.true;
+              done();
+            });
         });
     });
 
