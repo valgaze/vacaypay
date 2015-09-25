@@ -1,0 +1,17 @@
+<div class="expense-list">
+	<div ng-repeat="expense in data.expenses">
+		<div ng-controller="CollapseDemoCtrl">
+			<button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">{{ expense.name }}</button>
+			<hr>
+			<div collapse="isCollapsed">
+				<div class="well well-lg">
+					<p>{{ expense.payer }} paid ${{ expense.amount }} for {{ expense.name }}.</p>
+					<p>Friends that are splitting the cost:</p>
+					<ul>
+						<li ng-repeat="friend in expense.stakeholder">{{ friend.name }}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
