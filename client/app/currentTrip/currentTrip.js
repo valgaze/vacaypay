@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
-  .controller('CurrentTripController', function ($scope, $modal, $location, Trip) {
+  .controller('CurrentTripController', function ($scope, $modal, $location, $state, Trip) {
     $scope.currentTrip = {};
 
     $scope.hasTrip = function () {
@@ -10,7 +10,7 @@
         $scope.data = data;
 
         if (!$scope.data.name) {
-          $location.path('/fallback');
+          $state.transitionTo("fallback")
         }
       });
     }
