@@ -1,5 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var favicon = require('serve-favicon');
 
 var app = express();
 
@@ -14,6 +15,9 @@ mongoose.connect('mongodb://localhost/test');
 
 // routing handled in middleware
 require('./config/middleware.js')(app, express);
+
+// serve favicon
+app.use(favicon(__dirname + '/../client/assets/favicon.ico'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
