@@ -8,7 +8,7 @@
     $scope.signin = function () {
       Auth.signin($scope.user, function (token) {
           $window.localStorage.setItem('com.vacaypay', token);
-          $location.path('/home');
+          $location.path('/fallback');
           $scope.signinForm.$setPristine();
       });
     };
@@ -16,10 +16,11 @@
     $scope.signup = function () {
       Auth.signup($scope.user, function (token) {
           $window.localStorage.setItem('com.vacaypay', token);
-          $location.path('/home');
+          $location.path('/fallback');
           $scope.signupForm.$setPristine();   
       });
     };
+  });
 
 
 

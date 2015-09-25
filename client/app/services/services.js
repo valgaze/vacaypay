@@ -37,7 +37,7 @@
       return !!$window.localStorage.getItem('com.vacaypay');
     };
 
-    function signout = function () {
+    function signout () {
       $window.localStorage.removeItem('com.vacaypay');
       $location.path('/signin');
     };
