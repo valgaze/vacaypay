@@ -1,0 +1,10 @@
+<div class='currentTrip' ng-controller='CurrentTripController as currentTrip' ng-model='currentTrip'>
+  <div class='currentTripTitle'>{{ currentTrip.title }}</div>
+    <div class='expenses' ui-view></div>
+    <button ng-click='createExpense()'>Add New Expense</button>
+
+
+
+
+</div>
+
