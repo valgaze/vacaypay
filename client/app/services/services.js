@@ -42,6 +42,23 @@
       $location.path('/signin');
     };
 
+  })
+  .factory('Expenses', function ($http) {
+  var services = {
+    allExpenses: allExpenses
+  };
+
+  return services;
+
+  function allExpenses(callback) {
+    $http.get('/trips')
+    .then(function (res) {
+      callback(res.data);
+    });
+  };
+
+  return {allExpenses: allExpenses};
+
   });
 
 
