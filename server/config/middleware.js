@@ -11,7 +11,7 @@ module.exports = function(app, express) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(cookieParser());
-  app.use(express.static(path.join(__dirname, '../client')));
+  app.use(express.static(path.join(__dirname, '../../client')));
   
   app.use('/users', userRouter);
   app.use('/trips', tripRouter);
