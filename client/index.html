@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <title>VacayPay</title>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="styles/styles.css" />
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="lib/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
     <!-- Initial application module -->
     <script src="app/app.js"></script>
     <!-- Authorization -->
@@ -29,8 +32,8 @@
 
     <div class="navbar">
         <ul class="nav">
-          <a ui-sref="map">Overview</a>
-          <a ui-sref="event">New Event</a>
+          <a ui-sref="fallback">Home</a>
+          <!-- <a ui-sref="pastTrip" id="pastTripLink">Past Trips</a> -->
         </ul>
     </div>
 

@@ -2,11 +2,13 @@
   'use strict';
 
   angular.module('app')
-  .controller('CreateTripController', function ($scope, Trip, $location) {
+  .controller('CreateTripController', function ($scope, $location, $modalInstance, Trip) {
     $scope.trip = {};
     $scope.createTrip = function() {
-      Trip.createTrip($scope.trip)
-      .then(function() {
+      console.log($scope.trip);
+      Trip.createTrip($scope.trip, function() {
+        console.log('called back!');
+        $modalInstance.dismiss('Trip has been created');
         $location.path('/currentTrip');
       });
     };
