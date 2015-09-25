@@ -5,7 +5,7 @@
   .config(function($stateProvider, $urlRouterProvider, $httpProvider){
       
     // For any unmatched url, send to /route1
-    $urlRouterProvider.otherwise("/home")
+    $urlRouterProvider.otherwise("/fallback")
     
     $stateProvider
       .state('signin', {
