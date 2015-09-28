@@ -37,6 +37,7 @@ var PastTripSchema = new Schema({
 			}],
 		}
 	],
+	createdAt: new Date(),
 	summary: [{
 		payer: {
 			type: Schema.Types.ObjectId,
