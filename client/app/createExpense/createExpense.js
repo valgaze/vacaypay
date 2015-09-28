@@ -17,22 +17,17 @@
       buttonDefaultText: 'Select Contributors'
     };
 
-    $scope.addExpense = function() {
+    $scope.addExpense = function () {
       console.log($scope.expense);
-      Expenses.addExpense($scope.expense, function() {
-        console.log('called back!');
+      Expenses.addExpense($scope.expense, function () {
         $modalInstance.dismiss('Expense has been added');
         $state.transitionTo('currentTrip');
       });
     };
 
     $scope.getParticipants = function() {
-      Trip.hasTrip()
-      .then(function (trip) {
+      Trip.hasTrip(function (trip) {
         $scope.participants = trip.participants;
-      })
-      .catch(function (err) {
-        console.error(err);
       });
     };
 
