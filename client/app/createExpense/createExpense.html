@@ -1,9 +1,28 @@
 <div id="createExpense" class="modal-header">
   <h3 class="modal-title">Add A New Expense</h3>
-  <form ng-submit="addExpense()" ng-model="expense">
-    <input ng-model="expense.name" type="text" placeholder="What did you cover?" />
-    <input ng-model="expense.amount" type="text" placeholder="What was the total cost?"/>
-    <!-- Figure out how to choose stakeholders -->
-    <button type="submit">Submit</button>
+  <form class="form-horizontal" ng-submit="addExpense()" ng-model="expense">
+    <div class="form-group">
+      <label for="expenseName" class="col-sm-2 control-label">Item</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="expenseName" placeholder="What did you cover?">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="expenseAmount" class="col-sm-2 control-label">Cost</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="expenseAmount" placeholder="What was the total cost?">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="expenseContributors" class="col-sm-2 control-label">Contributors</label>
+      <div class="col-sm-10">
+        <div ng-dropdown-multiselect="" options="participants" selected-model="stakeholders" extra-settings="dropdownSettings" translation-texts="buttonText"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+    </div>
   </form>
 </div>
