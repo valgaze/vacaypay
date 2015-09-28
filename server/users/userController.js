@@ -1,5 +1,6 @@
 // Controller for route handling user
 var User = require('./userModel.js');
+var Trip = require('../trips/tripModel.js');
 var jwt = require('jwt-simple');
 
 module.exports = {
@@ -36,7 +37,41 @@ module.exports = {
 
   // Check if user exists, then compare password to hash
   signin: function(req, res, next) {
+    var username = req.body.username;
+    var password = req.body.password;
 
+    User.findOne({ username: username }, function(error, user) {
+      if (!user) {
+        console.log('User does not exist');
+        res.sendStatus(404);
+      } else {
+        user.compare(password)
+          .then(function(match) {
+            if (match && user.currentTrip) {
+              Trip.findOne({ _id: user.currentTrip }, function(error, trip) {
+                var token = jwt.encode({ id: user._id }, 'superdupersecret');
+                res.status(201).json({
+                  user: user._id,
+                  token: token,
+                  trip: trip
+                });
+              });
+            } else if (match) {
+              var token = jwt.encode({ id: user._id }, 'superdupersecret');
+              res.status(201).json({
+                user: user._id,
+                token: token,
+                trip: null
+              });                
+            } else {
+              console.log('Incorrect password');
+              res.sendStatus(403);
+            }
+          })
+          .fail(function(error) {
+            next(error);
+          });
+      }
+    });
   }
-
 };
