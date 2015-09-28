@@ -1,0 +1,9 @@
+<div id="createExpense" class="modal-header">
+  <h3 class="modal-title">Add A New Expense</h3>
+  <form ng-submit="addExpense()" ng-model="expense">
+    <input ng-model="expense.name" type="text" placeholder="What did you cover?" />
+    <input ng-model="expense.amount" type="text" placeholder="What was the total cost?"/>
+    <!-- Figure out how to choose stakeholders -->
+    <button type="submit">Submit</button>
+  </form>
+</div>
