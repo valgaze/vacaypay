@@ -1,6 +1,6 @@
 <div class="expense-list">
 	<div ng-repeat="expense in data.expenses">
-		<div ng-controller="CollapseDemoCtrl">
+		<div ng-controller="ExpenseCollapseController">
 			<button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">{{ expense.name }}</button>
 			<hr>
 			<div collapse="isCollapsed">
