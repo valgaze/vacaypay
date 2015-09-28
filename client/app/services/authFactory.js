@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
-  .factory('Auth', function ($http, $state, #window) {
+  .factory('Auth', function ($http, $state, $window) {
     var services = {
       signin: signin,
       signup: signup
