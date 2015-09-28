@@ -1,6 +1,13 @@
 <div>
+  <div ng-model="data">
+    <div class="tripName"> {{ data.name }}</div>
+    <div class="creator"> Trip started by <strong>{{ data.creator }}</strong></div>
+    <div class="participants" ng-repeat="friends in data.participants"> {{ friends.name }}</div>
+  </div>
+  <div>
+    <button type="button" class="btn btn-default" ng-click="open()">Add Expense</button>
+  </div>
 
   <div ui-view></div>
-
 </div>
 
