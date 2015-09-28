@@ -24,7 +24,7 @@
         controller: 'FallbackController'
       })
       .state('currentTrip', {
-        url: '/currenttrip',
+        url: '/currentTrip',
         abstract: true,
         templateUrl: 'app/currentTrip/currentTrip.html',
         controller: 'CurrentTripController'
