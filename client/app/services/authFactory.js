@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
-  .factory('Auth', function ($http) {
+  .factory('Auth', function ($http, $state, $window) {
     var services = {
       signin: signin,
       signup: signup
@@ -39,7 +39,7 @@
 
     function signout () {
       $window.localStorage.removeItem('com.vacaypay');
-      $location.path('/signin');
+      $state.transitionTo('/signin');
     };
 
   });

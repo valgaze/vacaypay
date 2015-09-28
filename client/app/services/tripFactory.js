@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-
+  angular.module('app')
   .factory('Trip', function ($http) {
     var services = {
       createTrip: createTrip,
