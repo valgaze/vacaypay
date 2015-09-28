@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
-  .controller('ExpenseController', function ($scope, Expenses) {
+  .controller('ExpenseController', function ($scope, $modal, Expenses) {
     $scope.data = {};
 
     $scope.getExpenses = function() {
@@ -15,6 +15,14 @@
       });
     };
     $scope.getExpenses();
+
+    $scope.open = function() {
+      var modalInstance = $modal.open({
+        animation: true,
+        templateUrl: 'app/createExpense/createExpense.html',
+        controller: 'CreateExpenseController'
+      });
+    };
   })
   
   .controller('CollapseDemoCtrl', function ($scope) {
