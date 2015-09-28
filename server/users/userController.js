@@ -45,12 +45,12 @@ module.exports = {
         console.log('User does not exist');
         res.sendStatus(404);
       } else {
-        user.compare(password)
+        user.comparePasswords(password)
           .then(function(match) {
             if (match && user.currentTrip) {
               Trip.findOne({ _id: user.currentTrip }, function(error, trip) {
                 var token = jwt.encode({ id: user._id }, 'superdupersecret');
-                res.status(201).json({
+                res.status(200).json({
                   user: user._id,
                   token: token,
                   trip: trip
@@ -58,7 +58,7 @@ module.exports = {
               });
             } else if (match) {
               var token = jwt.encode({ id: user._id }, 'superdupersecret');
-              res.status(201).json({
+              res.status(200).json({
                 user: user._id,
                 token: token,
                 trip: null

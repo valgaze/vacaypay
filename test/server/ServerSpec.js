@@ -8,7 +8,7 @@ var Trip = require('../../server/trips/tripModel.js');
 
 describe('Server Tests', function() {
 
-  beforeEach(function(done) {
+  afterEach(function(done) {
     // delete objects from db so they can be created for tests
     User.remove({ username: 'testuser' }).exec();
 
