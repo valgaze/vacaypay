@@ -13,7 +13,7 @@
 
     function signin (user, callback) {
       console.log(user, ' signed in!');
-      $http.post('/users/signin', {username: user})
+      $http.post('/users/signin', user)
       .then(function (res) {
         console.log('Signed in!');
         callback(res.data.token);
@@ -24,7 +24,7 @@
 
     function signup (user, callback) {
       console.log(user, ' just signed up!');
-      $http.post('/users/signup', {username: user})
+      $http.post('/users/signup', user)
       .then(function (res) {
         console.log('Signed up!');
         callback(res.data.token);
@@ -42,48 +42,5 @@
       $location.path('/signin');
     };
 
-  })
-  .factory('Expenses', function ($http) {
-    var services = {
-      allExpenses: allExpenses
-    };
-
-    return services;
-
-    function allExpenses(callback) {
-      $http.get('/trips')
-      .then(function (res) {
-        callback(res.data);
-      });
-    };
-
-  })
-  .factory('Trip', function ($http) {
-    var services = {
-      createTrip: createTrip,
-      hasTrip: hasTrip
-    };
-
-    return services;
-
-    function createTrip(trip, callback) {
-      console.log(trip);
-      $http.post('/trips', {
-        name: trip.name,
-        code: trip.code
-      })
-      .then(function() {
-        callback();
-      });
-    };
-
-    function hasTrip(callback) {
-      $http.get('/trips')
-      .then( function (res) {
-        callback(res.data);
-      })
-    }
   });
-
-
 })();
