@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "json-server --watch db.json --static ./client"
-    },
+  },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.13.2",
@@ -16,6 +16,7 @@
     "http": "0.0.0",
     "https": "^1.0.0",
     "jade": "~1.11.0",
+    "jwt-simple": "^0.3.1",
     "mocha": "^2.3.3",
     "mongoose": "^4.1.8",
     "morgan": "~1.6.1",
