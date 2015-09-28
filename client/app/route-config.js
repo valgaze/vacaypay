@@ -5,28 +5,34 @@
   .config(function($stateProvider, $urlRouterProvider, $httpProvider){
       
     // For any unmatched url, send to /route1
-    $urlRouterProvider.otherwise("/fallback")
+    $urlRouterProvider.otherwise('/fallback');
     
     $stateProvider
       .state('signin', {
-        url: "/signin",
-        templateUrl: "app/auth/signin.html",
+        url: '/signin',
+        templateUrl: 'app/auth/signin.html',
         controller: 'AuthController'
       })
       .state('signup', {
-        url: "/signup",
-        templateUrl: "app/auth/signup.html",
+        url: '/signup',
+        templateUrl: 'app/auth/signup.html',
         controller: 'AuthController'
       })
       .state('fallback', {
-        url: "/fallback",
-        templateUrl: "app/fallback/fallback.html",
+        url: '/fallback',
+        templateUrl: 'app/fallback/fallback.html',
         controller: 'FallbackController'
       })
       .state('currentTrip', {
-        url: "/currentTrip",
-        templateUrl: "app/currentTrip/currentTrip.html",
+        url: '/currentTrip',
+        abstract: true,
+        templateUrl: 'app/currentTrip/currentTrip.html',
         controller: 'CurrentTripController'
+      })
+      .state('currentTrip.expense', {
+        url: '',
+        templateUrl: 'app/expense/expense.html',
+        controller: 'ExpenseController'
       });
   // We add our $httpInterceptor into the array
   // of interceptors. Think of it like middleware for your ajax calls
