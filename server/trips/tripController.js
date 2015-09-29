@@ -1,6 +1,6 @@
 var User = require('../../server/users/userModel.js');
-var Trip = require('./trips/tripModel.js');
-var PastTrip = require('./trips/pastTripModel.js');
+var Trip = require('./tripModel.js');
+var PastTrip = require('./pastTripModel.js');
 
 module.exports = {
 	// TODO:
@@ -84,7 +84,7 @@ module.exports = {
 	getRecent: function(req, res){
 		var data = req.body;
 		var id = data.id;
-		PastTrip.find({participants: id},{},{sort: {'createdAt':-1}}, function(err, trip){
+		PastTrip.find({participants: id},{},{sort: {'_id':-1}}, function(err, trip){
 			if(err){
 				console.log('Trip with user as participant not found');
 				res.status(500).end();

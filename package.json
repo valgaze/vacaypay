@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "json-server --watch db.json --static ./client"
-    },
+    "start": "json-server --watch db.json --static ./client",
+    "test": "./node_modules/.bin/mocha --reporter nyan test/server/ServerSpec.js test/server/MongoSpec.js"
+  },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.13.2",
@@ -16,6 +17,7 @@
     "http": "0.0.0",
     "https": "^1.0.0",
     "jade": "~1.11.0",
+    "jwt-simple": "^0.3.1",
     "mocha": "^2.3.3",
     "mongoose": "^4.1.8",
     "morgan": "~1.6.1",
@@ -23,6 +25,9 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-nodemon": "^0.4.0",
     "supertest": "^1.1.0"
   }
 }
