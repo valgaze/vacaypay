@@ -37,15 +37,28 @@
 
   </head> 
   <body>
-    <h1>VacayPay</h1>
+    <div class="container">
 
-    <div class="navbar">
-        <ul class="nav">
-          <a ui-sref="fallback">Home</a>
-          <!-- <a ui-sref="pastTrip" id="pastTripLink">Past Trips</a> -->
-        </ul>
+    <div id="menu" class="navbar navbar-default navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header"><a class="navbar-brand" href="#">VacayPay</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse navbar-menubuilder">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a ui-sref="fallback">Home</a>
+                    </li>
+                    <li><a ui-sref="pastTrip">Past Trips</a>
+                    </li>
+                    <li><a ui-sref="fallback">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
-    <div ui-view></div>
+    <div ui-view></div>  
+    </div>
   </body>
 </html>
