@@ -7,6 +7,7 @@
 
     $scope.getExpenses = function() {
       Expenses.allExpenses(function(tripData) {
+        $scope.data = tripData[0];
         console.log(tripData);
       });
     };
@@ -21,8 +22,8 @@
     };
   })
   
-  .controller('ExpenseCollapseController', function ($scope) {
-    $scope.isCollapsed = false;
+  .controller('ExpenseAccordionController', function ($scope) {
+    $scope.oneAtATime = false;
   });
 
 })();

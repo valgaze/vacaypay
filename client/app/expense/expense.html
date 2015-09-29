@@ -1,18 +1,15 @@
-<div class="expense-list">
-	<div ng-repeat="expense in data.expenses">
-		<div ng-controller="ExpenseCollapseController">
-			<button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">{{ expense.name }}</button>
-			<hr>
-			<div collapse="isCollapsed">
-				<div class="well well-lg">
-					<p>{{ expense.payer }} paid ${{ expense.amount }} for {{ expense.name }}.</p>
-					<p>Friends that are splitting the cost:</p>
-					<ul>
-						<li ng-repeat="friend in expense.stakeholder">{{ friend.name }}</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+<div class="expense-list container">
+	<h2>Expense List</h2>
+	<div ng-controller="ExpenseAccordionController">
+	  <accordion close-others="oneAtATime">
+	    <accordion-group heading="{{expense.name}}" ng-repeat="expense in data.expenses">
+	      <p>{{ expense.payer }} paid ${{ expense.amount }} for {{ expense.name }}.</p>
+	      <p>Friends that are splitting the cost:</p>
+	      <ul>
+	      	<li ng-repeat="friend in expense.stakeholder">{{ friend.name }}</li>
+	      </ul>
+	    </accordion-group>
+	  </accordion>
 	</div>
 	<button type="button" class="btn btn-default" ng-click="open()">Add An Expense</button>
 </div>
