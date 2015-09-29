@@ -79,7 +79,7 @@ module.exports = {
 				stakeholders: data.stakeholders
 			}
 
-			Trip.update({_id: trip._id}, {$push: newExpense}, function(err, trip){
+			Trip.update({_id: trip._id}, {$push: {expenses: newExpense}}, function(err, trip){
 				res.status(201).send(trip).end();
 			})
 		})
