@@ -1,4 +1,4 @@
-describe('ShortenController', function () {
+describe('CreateTripController', function () {
   var $scope, $rootScope, $location, createController, $httpBackend, Trip;
 
   // using angular mocks, we can inject the injector
@@ -32,15 +32,15 @@ describe('ShortenController', function () {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  it('should have a link property on the $scope', function () {
+  it('should have a trip property on the $scope', function () {
     expect($scope.trip).to.be.an('object');
   });
 
-  it('should have a addLink method on the $scope', function () {
+  it('should have a createTrip method on the $scope', function () {
     expect($scope.createTrip).to.be.a('function');
   });
 
-  it('should be able to create new links with addLink()', function () {
+  it('should be able to create new trips with createTrip()', function () {
     $httpBackend.expectPOST("/trips").respond(201, '');
     $scope.createTrip();
     $httpBackend.flush();
