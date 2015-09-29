@@ -1,6 +1,10 @@
 <div>
+  <div>
+    <div class="tripName"> {{ data.name }}</div>
+    <div class="creator"> Trip started by <strong>{{ data.creator }}</strong></div>
+    <div class="participants" ng-repeat="friends in data.participants"> {{ friends.name }}</div>
+  </div>
 
   <div ui-view></div>
-
 </div>
 
