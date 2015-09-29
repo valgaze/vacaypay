@@ -31,7 +31,12 @@ module.exports = {
 				console.log('code is already taken');
 				res.status(422).end();
 			}
-			res.status(201).send(trip).end();
+			User.update({_id:id},{currentTrip:trip._id},{},function(err, trip){
+				if(err){
+					console.log('couldn\'t find user for some reason');
+				}
+				res.status(201).send(trip).end();
+			});
 		});
 	},
 
@@ -41,13 +46,18 @@ module.exports = {
 		var id = data.id;
 		var code = data.code;
 
-		Trip.update({code:code}, {$push: id}, function(err, trip){
+		Trip.update({code:code}, {$push: {participants: id}}, function(err, trip){
 			if(err){
 				console.log('Such code does not exist');
 				res.status(404).end();
 			}
-			console.log('result check: ', trip);
-			res.status(200).send(trip).end();
+			User.update({_id:id},{currentTrip:trip._id},{},function(err, trip){
+				if(err){
+					console.log('couldn\'t find user for some reason');
+				}
+				console.log('result check: ', trip);
+				res.status(200).send(trip).end();
+			});
 		});
 	},
 
