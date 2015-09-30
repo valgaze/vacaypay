@@ -5,6 +5,12 @@
     <title>VacayPay</title>
     <link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+  </head> 
+  <body>
+    <div ui-view></div>
+
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="lib/angular-bootstrap/ui-bootstrap.min.js"></script>
@@ -25,40 +31,11 @@
     <script src="app/expense/expense.js"></script>
     <script src="app/createExpense/createExpense.js"></script>
 
-
-
     <!-- Routing for HTML pages -->
     <script src="app/route-config.js"></script>
     <!-- Factory Files -->
     <script src="app/services/authFactory.js"></script>
     <script src="app/services/expenseFactory.js"></script>
     <script src="app/services/tripFactory.js"></script>
-
-
-  </head> 
-  <body>
-    <div class="container">
-
-    <div id="menu" class="navbar navbar-default navbar-default" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header"><a class="navbar-brand" href="#">VacayPay</a>
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse navbar-menubuilder">
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a ui-sref="fallback">Home</a>
-                    </li>
-                    <li><a ui-sref="pastTrip">Past Trips</a>
-                    </li>
-                    <li><a ui-sref="fallback">Contact Us</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div ui-view></div>  
-    </div>
   </body>
 </html>

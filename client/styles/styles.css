@@ -1,0 +1,43 @@
+/*  NAV BAR STYLES */
+
+#menu.navbar-default .navbar-brand {
+    color: rgba(255, 255, 255, 1);
+}
+
+#menu.navbar-default {
+    font-size: 14px;
+    background-color: rgba(244, 67, 54, 1);
+    border-width: 0px;
+    border-radius: 0px;
+}
+
+#menu.navbar-default .navbar-nav>li>a {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(248, 248, 248, 0);
+}
+
+#menu.navbar-default .navbar-nav>li>a:hover,
+#menu.navbar-default .navbar-nav>li>a:focus {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(244, 67, 54, 1);
+}
+
+#menu.navbar-default .navbar-nav>.active>a,
+#menu.navbar-default .navbar-nav>.active>a:hover,
+#menu.navbar-default .navbar-nav>.active>a:focus {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(244, 67, 54, 1);
+}
+
+#menu.navbar-default .navbar-toggle {
+    border-color: #ffffff;
+}
+
+#menu.navbar-default .navbar-toggle:hover,
+#menu.navbar-default .navbar-toggle:focus {
+    background-color: #f44336;
+}
+
+#menu.navbar-default .navbar-toggle .icon-bar {
+    background-color: #ffffff;
+}
