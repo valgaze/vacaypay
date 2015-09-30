@@ -2,14 +2,16 @@
   'use strict';
 
   angular.module('app')
-  .controller('CreateExpenseController', function ($scope, $modalInstance, $state, Expenses, Trip) {
+  .controller('CreateExpenseController', function ($scope, $modalInstance, $state, $cacheFactory, Expenses) {
+    var cache = $cacheFactory.get('tripData');
+
     $scope.expense = {};
-    $scope.participants;
+    $scope.participants = cache.get('participants');
     $scope.stakeholders = [];
 
     $scope.dropdownSettings = {
       smartButtonMaxItems: 5,
-      scrollableHeight: '100px',
+      scrollableHeight: '200px',
       scrollable: true
     };
 
@@ -18,19 +20,11 @@
     };
 
     $scope.addExpense = function () {
-      console.log($scope.expense);
-      Expenses.addExpense($scope.expense, function () {
+      Expenses.addExpense($scope.expense, $scope.stakeholders, function () {
         $modalInstance.dismiss('Expense has been added');
         $state.transitionTo('currentTrip');
       });
     };
-
-    $scope.getParticipants = function() {
-      Trip.hasTrip(function (trip) {
-        $scope.participants = trip.participants;
-      });
-    };
-
 
   });
   

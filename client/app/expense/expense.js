@@ -2,15 +2,15 @@
   'use strict';
 
   angular.module('app')
-  .controller('ExpenseController', function ($scope, $modal, Expenses) {
+  .controller('ExpenseController', function ($scope, $modal, $cacheFactory, Trip) {
     $scope.data = {};
 
     $scope.getExpenses = function() {
-      Expenses.allExpenses(function(tripData) {
-        $scope.data = tripData[0];
-        console.log(tripData);
+      Trip.getTrip(function (tripDataCache) {
+        $scope.data.expenses = tripDataCache.get('expenses');
       });
     };
+    
     $scope.getExpenses();
 
     $scope.open = function() {

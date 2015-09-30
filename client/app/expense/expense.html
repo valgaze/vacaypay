@@ -6,7 +6,7 @@
 	      <p>{{ expense.payer }} paid ${{ expense.amount }} for {{ expense.name }}.</p>
 	      <p>Friends that are splitting the cost:</p>
 	      <ul>
-	      	<li ng-repeat="friend in expense.stakeholder">{{ friend.name }}</li>
+	      	<li ng-repeat="friend in expense.stakeholders">{{ friend.id }}</li>
 	      </ul>
 	    </accordion-group>
 	  </accordion>
