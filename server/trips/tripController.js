@@ -6,7 +6,7 @@ module.exports = {
 	// TODO:
 	// Look up the database to find requested users current trip.
 	getCurrentTrip: function(req, res){
-		var id = req.body;
+		var id = req.params.id;
 		User.findById(id, function(err, tripinfo){
 			Trip.findById(tripinfo.currentTrip, function(err, currenttrip){
 				res.status(200).send(currenttrip).end();
@@ -26,12 +26,17 @@ module.exports = {
 			name: tripName,
 			code: code,
 			expenses: []
-		}, function(err, trip){
+		}, function(err, newtrip){
 			if(err) {
 				console.log('code is already taken');
 				res.status(422).end();
 			}
-			res.status(201).send(trip).end();
+			User.findOne({_id:id},function(err, user){
+				if(err){
+					console.log('couldn\'t find user for some reason');
+				}
+				res.status(201).send(newtrip).end();
+			});
 		});
 	},
 
@@ -41,13 +46,29 @@ module.exports = {
 		var id = data.id;
 		var code = data.code;
 
-		Trip.update({code:code}, {$push: id}, function(err, trip){
+		Trip.findOne({code:code}, function(err, trip){
+			console.log(trip)
 			if(err){
 				console.log('Such code does not exist');
-				res.status(404).end();
+				res.status(404).end('Such code does not exist');
 			}
-			console.log('result check: ', trip);
-			res.status(200).send(trip).end();
+
+			User.findById(id, function(err, user){
+				if(err){
+					console.log('couldn\'t find user for some reason');
+				}
+				user.currentTrip = trip._id;
+				trip.participants.push(user._id);
+				trip.save(function(err, tripresult){
+					if (err) {
+						console.log('Problem updating trip');
+						res.status(500).send(trip).end();
+					}
+					user.save(function(err, userresult){
+						res.status(200).send(tripresult).end();
+					})
+				});
+			});
 		});
 	},
 
@@ -55,24 +76,32 @@ module.exports = {
 	addExpense: function(req, res){
 		var data = req.body;
 		var id = data.id;
+		var name = data.name;
+		var amount = data.amount;
+		var stakeholders = data.stakeholders;
 
-		Trip.find({participants: id}, function(err, trip){
-			if(err) {
-				console.log('Trip with given user as participant not found');
-				res.status(404).end();
-			}
+		User.findById(id, function(err, user){
+			Trip.findById(user.currentTrip, function(err, trip){
+				if(err) {
+					console.log('Trip with given user as participant not found');
+					res.status(404).end();
+				}
 
-			var newExpense = {
-				name: data.name,
-				amount: data.amount,
-				payer: trip.payer,
-				stakeholders: data.stakeholders
-			}
+				var newExpense = {
+					name: name,
+					amount: amount,
+					payer: id,
+					stakeholders: stakeholders
+				}
 
-			Trip.update({_id: trip._id}, {$push: newExpense}, function(err, trip){
-				res.status(201).send(trip).end();
-			})
-		})
+				trip.expenses.push(newExpense);
+
+				trip.save(function(err, trip){
+					if(err) console.log('Error saving trip');
+					res.status(201).send(trip).end();
+				});
+			});
+		});
 	},
 
 	// Replicate current trip to old trip and then delete current trip 
@@ -92,5 +121,4 @@ module.exports = {
 			res.status(200).send(trip).end();
 		})
 	}
-
 }
