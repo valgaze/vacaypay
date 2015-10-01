@@ -47,7 +47,6 @@ module.exports = {
 		var code = data.code;
 
 		Trip.findOne({code:code}, function(err, trip){
-			console.log(trip)
 			if(err){
 				console.log('Such code does not exist');
 				res.status(404).end('Such code does not exist');
