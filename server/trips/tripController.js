@@ -46,8 +46,6 @@ module.exports = {
 		var id = data.id;
 		var code = data.code;
 
-		console.log(code);
-
 		Trip.findOne({code:code}, function(err, trip){
 			console.log(trip)
 			if(err){
@@ -55,18 +53,20 @@ module.exports = {
 				res.status(404).end('Such code does not exist');
 			}
 
-			User.findById({_id:id}, function(err, user){
+			User.findById(id, function(err, user){
 				if(err){
 					console.log('couldn\'t find user for some reason');
 				}
 				user.currentTrip = trip._id;
 				trip.participants.push(user._id);
-				trip.save(function(err, result){
+				trip.save(function(err, tripresult){
 					if (err) {
 						console.log('Problem updating trip');
 						res.status(500).send(trip).end();
 					}
-					res.status(200).send(trip).end();
+					user.save(function(err, userresult){
+						res.status(200).send(tripresult).end();
+					})
 				});
 			});
 		});
@@ -80,25 +80,26 @@ module.exports = {
 		var amount = data.amount;
 		var stakeholders = data.stakeholders;
 
-		Trip.findOne({participants: id}, function(err, trip){
-			if(err) {
-				console.log('Trip with given user as participant not found');
-				res.status(404).end();
-			}
+		User.findById(id, function(err, user){
+			Trip.findById(user.currentTrip, function(err, trip){
+				if(err) {
+					console.log('Trip with given user as participant not found');
+					res.status(404).end();
+				}
 
+				var newExpense = {
+					name: name,
+					amount: amount,
+					payer: id,
+					stakeholders: stakeholders
+				}
 
-			var newExpense = {
-				name: name,
-				amount: amount,
-				payer: id,
-				stakeholders: stakeholders
-			}
+				trip.expenses.push(newExpense);
 
-			trip.expenses.push(newExpense);
-
-			trip.save(function(err, trip){
-				if(err) console.log('Error saving trip');
-				res.status(201).send(trip).end();
+				trip.save(function(err, trip){
+					if(err) console.log('Error saving trip');
+					res.status(201).send(trip).end();
+				});
 			});
 		});
 	},
