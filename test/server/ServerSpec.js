@@ -11,7 +11,8 @@ describe('Server Tests', function() {
   afterEach(function(done) {
     // delete objects from db so they can be created for tests
     User.remove({ username: 'testuser' }).exec();
-
+    Trip.remove({ name: 'Bizzare Adventure'}).exec();
+    Trip.remove({ name: 'Random'}).exec();
     done();
   });
 
@@ -92,4 +93,111 @@ describe('Server Tests', function() {
     });
 
   }); // Account login
+
+  describe('Trip creation: ', function() {
+
+    beforeEach(function(done) {
+      request(app)
+        .post('/users/signup')
+        .send({
+          'username': 'testuser',
+          'password': 'testpw' })
+        .end(done);
+    });
+
+    it('Creates a trip', function(done) {
+      User.findOne({'username': 'testuser'}, function(err, user){
+        request(app)
+          .post('/trips/')
+          .send({
+            'id': user._id,
+            'name': 'Bizzare Adventure',
+            'code': 'JoJo'
+          })
+          .expect(201)
+          .expect(function(res) {
+            expect(res.body.name).to.equal('Bizzare Adventure');
+          })
+          .end(done);
+      })
+    });
+
+    it('Join a trip', function(done) {
+      User.findOne({'username':'testuser'}, function(err, user){
+        Trip.create({
+          creator: user._id,
+          participants: [user._id],
+          name: 'Random',
+          code: 'Random',
+          expenses: []
+        }, function(err, trip){
+        
+        user.currentTrip = trip._id;
+        user.save(function(err, result){
+          request(app)
+          .get('/trips/' + user._id)
+          .expect(200)
+          .expect(function(res) {
+            expect(res.body.name).to.equal('Random');
+          })
+          .end(done);
+          });
+        });
+      });
+    });
+
+    it('Get current trip', function(done) {
+      User.findOne({'username':'testuser'}, function(err, user){
+        Trip.create({
+          creator: user._id,
+          participants: [user._id],
+          name: 'Random',
+          code: 'Random',
+          expenses: []
+        }, function(err, trip){
+        
+        user.currentTrip = trip._id;
+        user.save(function(){
+          request(app)
+          .get('/trips/' + user._id)
+          .expect(200)
+          .expect(function(res) {
+            expect(res.body.name).to.equal('Random');
+          })
+          .end(done);
+          });
+        })
+      })
+    });
+
+    it('Adds expense', function(done) {
+      User.findOne({'username':'testuser'}, function(err, user){
+        Trip.create({
+          creator: user._id,
+          participants: [user._id],
+          name: 'Random',
+          code: 'Random',
+          expenses: []
+        }, function(err, trip){
+        
+        user.currentTrip = trip._id;
+        user.save(function(err, user){
+            request(app)
+              .post('/trips/expense')
+              .send({
+                id: user._id,
+                name: 'beer',
+                amount: 100,
+                stakeholders: [user._id]
+              })
+              .expect(201)
+              .expect(function(res) {
+                expect(res.body.name).to.equal('Random');
+              })
+              .end(done);
+          });
+        })
+      })
+  });
+});
 });
