@@ -3,9 +3,11 @@
   angular.module('app')
   .factory('Trip', function ($http, $cacheFactory, Auth) {
 
+    var currentUser = Auth.currentUser;
+
     var services = {
       createTrip: createTrip,
-      getTrip: getTrip,
+      cacheTrip: cacheTrip,
       hasTrip: hasTrip
     };
 
@@ -14,35 +16,33 @@
     function createTrip(trip, callback) {
       console.log(trip);
       $http.post('/trips', {
-        user: Auth.currentUser(),
+        user: currentUser,
         name: trip.name,
         code: trip.code
       })
-      .then(function () {
-        getTrip();
+      .then(function (res) {
+        cacheTrip(res.data);
         callback();
       });
     }
 
-    function getTrip(callback) {
-      $http.get('/trips', {
-        params: {user: Auth.currentUser()}
-      })
-      .then(function (res) {
-        var cache = $cacheFactory('tripData');
-        cache.put('_id', res.data[0]._id);
-        cache.put('creator', res.data[0].creator);
-        cache.put('participants', res.data[0].participants);
-        cache.put('name', res.data[0].name);
-        cache.put('code', res.data[0].code);
-        cache.put('expenses', res.data[0].expenses);
-        callback(cache);
-      });
+    function cacheTrip (trip) {
+      var cache = $cacheFactory('tripData');
+      cache.put('_id', trip._id);
+      cache.put('creator', trip.creator);
+      cache.put('participants', trip.participants);
+      cache.put('name', trip.name);
+      cache.put('code', trip.code);
+      cache.put('expenses', trip.expenses);
+      return cache;
     }
 
     function hasTrip(callback) {
-      $http.get('/trips')
+      $http.get('/trips', {
+        params: { user: currentUser }
+      })
       .then( function (res) {
+        cacheTrip(res.data);
         callback(res.data);
       });
     }
