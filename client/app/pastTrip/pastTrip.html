@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>Past Trips</h2>
+  <div ng-controller="PastTripAccordionController">
+    <accordion close-others="oneAtATime">
+      <accordion-group heading="{{trip.name}}" ng-repeat="trip in data.pastTrips">
+        <p>Created by: {{ trip.creator }}</p>
+        <p>Participants:</p>
+        <ul>
+          <li ng-repeat="person in trip.participants">{{ person.username }}</li>
+        </ul>
+        <p>Trip Expenses:</p>
+        <div ng-repeat="expense in trip.expenses">
+          <p>{{ expense.payer.username }} paid {{ expense.amount }} for {{ expense.name }}. The cost was split between:</p>
+          <ul>
+            <li ng-repeat="stakeholder in expense.stakeholders">{{ stakeholder.username }}</li>
+          </ul>
+        </div>
+        <p>Final Transaction Summary:</p>
+        <ul>
+          <li ng-repeat="transaction in trip.summary">{{ transaction.payer }} owes {{ transaction.payee }} {{ transaction.amount }}.</li>
+        </ul>
+      </accordion-group>
+    </accordion>
+  </div>
+</div>

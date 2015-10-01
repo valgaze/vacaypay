@@ -33,6 +33,11 @@
         url: '',
         templateUrl: 'app/expense/expense.html',
         controller: 'ExpenseController'
+      })
+      .state('pastTrips', {
+        url: '/pastTrips',
+        templateUrl: 'app/pastTrip/pastTrip.html',
+        controller: 'PastTripController'
       });
   // We add our $httpInterceptor into the array
   // of interceptors. Think of it like middleware for your ajax calls
