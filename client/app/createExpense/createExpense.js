@@ -22,7 +22,7 @@
     $scope.addExpense = function () {
       Expenses.addExpense($scope.expense, $scope.stakeholders, function () {
         $modalInstance.dismiss('Expense has been added');
-        $state.transitionTo('currentTrip');
+        $state.transitionTo('expense');
       });
     };
 
