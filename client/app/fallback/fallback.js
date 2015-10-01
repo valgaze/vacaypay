@@ -11,7 +11,6 @@
         controller: 'CreateTripController'
       });
     };
-
+    
   });
-
 })();
