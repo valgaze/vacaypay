@@ -20,28 +20,28 @@ module.exports = {
 		var id = data.id;
 		var tripName = data.name;
 		var code = data.code;
-		Trip.create({
-			creator: id,
-			participants: [id],
-			name: tripName,
-			code: code,
-			expenses: []
-		}, function(err, newTrip){
+		User.findById(id, function(err, user){
 			if(err) {
-				console.log('code is already taken');
-				res.status(422).end();
+				console.log('User not found');
+				res.status(404).end();
 			}
-			User.findById(id,function(err, user){
-				if(err){
-					console.log('couldn\'t find user for some reason');
-					res.status(404).end();
+			Trip.create({
+				creator: {id: user._id, username: user.name},
+				participants: [{id: user._id, username: user.name}],
+				name: tripName,
+				code: code,
+				expenses: []
+			}, function(err, newTrip){
+				if(err) {
+					console.log('code is already taken');
+					res.status(422).end();
 				}
 				user.currentTrip = newTrip._id;
 				user.save( function (err, result) {
 					res.status(201).send(newTrip).end();
 				});
 			});
-		});
+		})
 	},
 
 	// Add user to the participant list of designated trip
@@ -61,7 +61,7 @@ module.exports = {
 					console.log('couldn\'t find user for some reason');
 				}
 				user.currentTrip = trip._id;
-				trip.participants.push(user._id);
+				trip.participants.push({id: user._id, username: user.name});
 				trip.save(function(err, tripresult){
 					if (err) {
 						console.log('Problem updating trip');
@@ -93,7 +93,7 @@ module.exports = {
 				var newExpense = {
 					name: name,
 					amount: amount,
-					payer: id,
+					payer: {id: user._id, username: user.name},
 					stakeholders: stakeholders
 				}
 

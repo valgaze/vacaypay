@@ -125,8 +125,8 @@ describe('Server Tests', function() {
     it('Join a trip', function(done) {
       User.findOne({'username':'testuser'}, function(err, user){
         Trip.create({
-          creator: user._id,
-          participants: [user._id],
+          creator: {id: user._id, username: user.name},
+          participants: [{id: user._id, username: user.name}],
           name: 'Random',
           code: 'Random',
           expenses: []
@@ -149,22 +149,21 @@ describe('Server Tests', function() {
     it('Get current trip', function(done) {
       User.findOne({'username':'testuser'}, function(err, user){
         Trip.create({
-          creator: user._id,
-          participants: [user._id],
+          creator: {id: user._id, username: user.name},
+          participants: [{id: user._id, username: user.name}],
           name: 'Random',
           code: 'Random',
           expenses: []
         }, function(err, trip){
-        
         user.currentTrip = trip._id;
-        user.save(function(){
+        user.save(function(err, result){
           request(app)
-          .get('/trips/' + user._id)
-          .expect(200)
-          .expect(function(res) {
-            expect(res.body.name).to.equal('Random');
-          })
-          .end(done);
+            .get('/trips?id=' + user._id)
+            .expect(200)
+            .expect(function(res) {
+              expect(res.body.name).to.equal('Random');
+            })
+            .end(done);
           });
         })
       })
@@ -173,8 +172,8 @@ describe('Server Tests', function() {
     it('Adds expense', function(done) {
       User.findOne({'username':'testuser'}, function(err, user){
         Trip.create({
-          creator: user._id,
-          participants: [user._id],
+          creator: {id: user._id, username: user.name},
+          participants: [{id: user._id, username: user.name}],
           name: 'Random',
           code: 'Random',
           expenses: []
@@ -188,7 +187,7 @@ describe('Server Tests', function() {
                 id: user._id,
                 name: 'beer',
                 amount: 100,
-                stakeholders: [user._id]
+                stakeholders: [{id: user._id, username: user.name}]
               })
               .expect(201)
               .expect(function(res) {

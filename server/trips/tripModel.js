@@ -7,12 +7,18 @@ var Schema = mongoose.Schema;
 
 var TripSchema = new Schema({
 	creator: {
-		type: Schema.Types.ObjectId,
-		ref: 'User'
+		id:{
+			type: Schema.Types.ObjectId,
+			ref: 'User'
+		}, 
+		username: {type: String}
 	},
 	participants: [{
-		type: Schema.Types.ObjectId,
-		ref: 'User'
+		id:{
+			type: Schema.Types.ObjectId,
+			ref: 'User'
+		}, 
+		username: {type: String}
 	}],
 	name: {
 		type: String,
@@ -28,12 +34,18 @@ var TripSchema = new Schema({
 			name: String,
 			amount: Number,
 			payer: {
-				type: Schema.Types.ObjectId,
-				ref: 'User'
+				id:{
+					type: Schema.Types.ObjectId,
+					ref: 'User'
+				}, 
+				username: {type: String}
 			},
 			stakeholders: [{
-				type: Schema.Types.ObjectId,
-				ref: 'User'
+				id:{
+					type: Schema.Types.ObjectId,
+					ref: 'User'
+				}, 
+				username: {type: String}
 			}],
 		}
 	]
