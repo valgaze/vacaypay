@@ -17,7 +17,8 @@ h5 {
   color: #ffffff;
 }
 
-.btn:hover {
+.btn:hover,
+.btn:focus {
   color: #ffffff;
   background-color: #00abc0;
 }
