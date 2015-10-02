@@ -20,7 +20,7 @@
       $http.post('/users/signin', user)
       .then(function (res) {
         console.log('Signed in!');
-        currentUserId = res.body.user;
+        currentUserId = res.data.username;
         callback(res.data.token);
       }, function (res) {
         console.log('Sign in error');
@@ -32,7 +32,7 @@
       $http.post('/users/signup', user)
       .then(function (res) {
         console.log('Signed up!');
-        currentUserId = res.body.user;
+        currentUserId = res.data.username;
         callback(res.data.token);
       }, function (res) {
         console.log('Error during sign up');
@@ -49,7 +49,7 @@
 
     function signout () {
       $window.localStorage.removeItem('com.vacaypay');
-      $state.transitionTo('/signin');
+      $state.transitionTo('signin');
     }
 
   });
