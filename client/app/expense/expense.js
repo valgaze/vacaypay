@@ -6,12 +6,14 @@
 
     $scope.data = {};
 
+
     $scope.getExpenses = function() {
       // The trip data cache has not been set yet so need to call has trip here for now...
       Trip.hasTrip(function(data) {
         Trip.cacheTrip(data);
         var cache = $cacheFactory.get('tripData');
         $scope.data.expenses = cache.get('expenses');
+        console.log($scope.data.expenses);
       });
     };
     
@@ -22,6 +24,10 @@
         animation: true,
         templateUrl: 'app/createExpense/createExpense.html',
         controller: 'CreateExpenseController'
+      });
+      modalInstance.result.then(function() {
+        console.log('after modal open');
+        $scope.getExpenses();
       });
     };
   })

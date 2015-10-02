@@ -16,12 +16,12 @@
     return services;
 
     function signin (user, callback) {
-      console.log(user, ' signed in!');
+      console.log('signed in!');
       $http.post('/users/signin', user)
       .then(function (res) {
         currentUserId = res.data.user;
         console.log(currentUserId);
-        $window.localStorage.setItem('userID', currentUserId);
+        $window.localStorage.setItem('userId', currentUserId);
         callback(res.data.token);
       }, function (res) {
         console.log('Sign in error');
@@ -29,12 +29,12 @@
     }
 
     function signup (user, callback) {
-      console.log(user, ' just signed up!');
+      console.log('just signed up!');
       $http.post('/users/signup', user)
       .then(function (res) {
         console.log('Signed up!');
         currentUserId = res.data.user;
-        $window.localStorage.setItem('userID', currentUserId);
+        $window.localStorage.setItem('userId', currentUserId);
         callback(res.data.token);
       }, function (res) {
         console.log('Error during sign up');

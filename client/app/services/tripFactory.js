@@ -3,13 +3,14 @@
   angular.module('app')
   .factory('Trip', function ($http, $cacheFactory, $window, Auth) {
 
-    var currentUser = $window.localStorage.getItem('userID');
+    var currentUser = $window.localStorage.getItem('userId');
     var cache = $cacheFactory('tripData');
     // var currentTripData;
 
     var services = {
       createTrip: createTrip,
       cacheTrip: cacheTrip,
+      joinTrip: joinTrip,
       // currentTrip: currentTrip,
       hasTrip: hasTrip
     };
@@ -29,6 +30,17 @@
       });
     }
 
+    function joinTrip(code, callback) {
+      $http.post('/trips/join', {
+        id: $window.localStorage.getItem('userId'),
+        code: code
+      })
+      .then(function(res) {
+        cacheTrip(res.data);
+        callback();
+      });
+    }
+
     function cacheTrip (trip) {
       cache.put('_id', trip.id);
       cache.put('creator', trip.creator);
@@ -36,6 +48,7 @@
       cache.put('name', trip.name);
       cache.put('code', trip.code);
       cache.put('expenses', trip.expenses);
+      console.log(trip.expenses);
       return cache;
     }
 
