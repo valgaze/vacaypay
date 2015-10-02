@@ -76,7 +76,6 @@
     // if it's not valid, we then redirect back to signin/signup
     $rootScope.$on('$stateChangeStart', function (evt, toState) {
       if (toState.authenticate && !Auth.isAuth()) {
-        console.log('test');
         $state.transitionTo("signin");
       }
     });
