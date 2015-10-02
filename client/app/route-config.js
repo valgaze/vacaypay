@@ -30,7 +30,7 @@
         controller: 'CurrentTripController'
       })
       .state('currentTrip.expense', {
-        url: '',
+        url: '^/currentTrip',
         templateUrl: 'app/expense/expense.html',
         controller: 'ExpenseController'
       })
