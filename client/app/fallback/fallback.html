@@ -1,7 +1,34 @@
-<div class="fallback">
-  <div class="jumbotron">
-    <h1>Hi, {{ name }}!</h1>
-    <p>To begin using the VacayPay trip expense log, you must first create a new trip. Click the button below to get started.</p>
-    <button type="button" class="btn btn-primary btn-lg" ng-click="open()">Create Trip</button>
+<div id="menu" class="navbar navbar-default " role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header"><a class="navbar-brand" ui-sref="fallback">VacayPay</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse navbar-menubuilder">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a ui-sref="pastTrip">Past Trips</a></li>
+        <li><a ui-sref="logout">Logout</a></li>
+      </ul>
+    </div>
   </div>
+</div>
+
+<div class="container-fluid">
+  <div class="jumbotron">
+    <h2>Hi!</h2>
+    <p>Click below when you're ready to embark on a new journey!</p>
+    <button type="button" class="btn" ng-click="open()">Create Trip</button>
+  </div>
+
+  <hr>
+
+  <div class="jumbotron">
+    <p>Friends already on a trip? Type in their trip code to join them!</p>
+    <form name="joinTripForm" ng-submit="joinTrip()">
+      <input type="text" name="code" ng-model="tripCode" placeholder="Trip Code" required>
+      <button type="submit" class="btn">Join Trip</button>
+    </form>
+  </div>
+
+  <hr>
 </div>
