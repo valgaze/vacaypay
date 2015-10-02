@@ -172,8 +172,8 @@ describe('Server Tests', function() {
     it('Adds expense', function(done) {
       User.findOne({'username':'testuser'}, function(err, user){
         Trip.create({
-          creator: {id: user._id, username: user.name},
-          participants: [{id: user._id, username: user.name}],
+          creator: {id: user._id, username: user.username},
+          participants: [{id: user._id, username: user.username}],
           name: 'Random',
           code: 'Random',
           expenses: []
@@ -187,7 +187,7 @@ describe('Server Tests', function() {
                 id: user._id,
                 name: 'beer',
                 amount: 100,
-                stakeholders: [{id: user._id, username: user.name}]
+                stakeholders: [{id: user._id, username: user.username}]
               })
               .expect(201)
               .expect(function(res) {

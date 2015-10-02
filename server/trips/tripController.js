@@ -26,8 +26,8 @@ module.exports = {
 				res.status(404).end();
 			}
 			Trip.create({
-				creator: {id: user._id, username: user.name},
-				participants: [{id: user._id, username: user.name}],
+				creator: {id: user._id, username: user.username},
+				participants: [{id: user._id, username: user.username}],
 				name: tripName,
 				code: code,
 				expenses: []
@@ -61,7 +61,7 @@ module.exports = {
 					console.log('couldn\'t find user for some reason');
 				}
 				user.currentTrip = trip._id;
-				trip.participants.push({id: user._id, username: user.name});
+				trip.participants.push({id: user._id, username: user.username});
 				trip.save(function(err, tripresult){
 					if (err) {
 						console.log('Problem updating trip');
@@ -93,7 +93,7 @@ module.exports = {
 				var newExpense = {
 					name: name,
 					amount: amount,
-					payer: {id: user._id, username: user.name},
+					payer: {id: user._id, username: user.username},
 					stakeholders: stakeholders
 				}
 
