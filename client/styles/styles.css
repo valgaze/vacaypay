@@ -9,6 +9,19 @@ h5 {
   text-align: center;
 }
 
+/* BUTTONS */
+
+.btn {
+  border-radius: 0;
+  background-color: #00bcd4;
+  color: #ffffff;
+}
+
+.btn:hover {
+  color: #ffffff;
+  background-color: #00abc0;
+}
+
 /* SIGNIN/SIGNUP PAGES */
 
 .authForm > *,
@@ -29,7 +42,19 @@ h5 {
   cursor: pointer;
 }
 
-/*  NAV BAR STYLES */
+/* FALLBACK PAGE */
+
+.jumbotron {
+  background-color: #f8f8f8;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.jumbotron p {
+  font-size: 18px;
+}
+
+/*  NAV BAR */
 
 #menu.navbar-default .navbar-brand {
     color: rgba(255, 255, 255, 1);
