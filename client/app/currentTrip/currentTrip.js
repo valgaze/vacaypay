@@ -8,7 +8,6 @@
     $scope.hasTrip = function () {
       Trip.hasTrip( function (data) {
         $scope.data = data;
-        console.log($scope.data.name);
         if (!$scope.data.name) {
           $state.transitionTo('fallback');
         }

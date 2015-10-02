@@ -6,9 +6,9 @@ module.exports = {
 	// TODO:
 	// Look up the database to find requested users current trip.
 	getCurrentTrip: function(req, res){
-		var id = req.params.id;
-		User.findById(id, function(err, tripinfo){
-			Trip.findById(tripinfo.currentTrip, function(err, currenttrip){
+		var id = req.query.id;
+		User.findById(id, function(err, user){
+			Trip.findById(user.currentTrip, function(err, currenttrip){
 				res.status(200).send(currenttrip).end();
 			})
 		})
@@ -26,16 +26,20 @@ module.exports = {
 			name: tripName,
 			code: code,
 			expenses: []
-		}, function(err, newtrip){
+		}, function(err, newTrip){
 			if(err) {
 				console.log('code is already taken');
 				res.status(422).end();
 			}
-			User.findOne({_id:id},function(err, user){
+			User.findById(id,function(err, user){
 				if(err){
 					console.log('couldn\'t find user for some reason');
+					res.status(404).end();
 				}
-				res.status(201).send(newtrip).end();
+				user.currentTrip = newTrip._id;
+				user.save( function (err, result) {
+					res.status(201).send(newTrip).end();
+				});
 			});
 		});
 	},

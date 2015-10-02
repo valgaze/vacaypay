@@ -5,7 +5,7 @@
   .config(function($stateProvider, $urlRouterProvider, $httpProvider){
       
     // For any unmatched url, send to /route1
-    $urlRouterProvider.otherwise('/fallback');
+    $urlRouterProvider.otherwise('/currentTrip');
     
     $stateProvider
       .state('signin', {
@@ -76,6 +76,7 @@
     // if it's not valid, we then redirect back to signin/signup
     $rootScope.$on('$stateChangeStart', function (evt, toState) {
       if (toState.authenticate && !Auth.isAuth()) {
+        evt.preventDefault();
         $state.transitionTo("signin");
       }
     });

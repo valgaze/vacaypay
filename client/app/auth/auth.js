@@ -8,7 +8,7 @@
     $scope.signin = function () {
       Auth.signin($scope.user, function (token) {
           $window.localStorage.setItem('com.vacaypay', token);
-          $state.transitionTo("fallback")
+          $state.transitionTo("currentTrip.expense")
           $scope.signinForm.$setPristine();
       });
     };
@@ -16,7 +16,7 @@
     $scope.signup = function () {
       Auth.signup($scope.user, function (token) {
           $window.localStorage.setItem('com.vacaypay', token);
-          $state.transitionTo("fallback");
+          $state.transitionTo("currentTrip.expense");
           $scope.signupForm.$setPristine();   
       });
     };

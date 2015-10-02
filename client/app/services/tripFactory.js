@@ -1,9 +1,9 @@
 (function() {
   'use strict';
   angular.module('app')
-  .factory('Trip', function ($http, $cacheFactory, Auth) {
+  .factory('Trip', function ($http, $cacheFactory, $window, Auth) {
 
-    var currentUser = Auth.currentUser;
+    var currentUser = $window.localStorage.getItem('userID');
     var cache = $cacheFactory('tripData');
     // var currentTripData;
 
@@ -17,9 +17,8 @@
     return services;
 
     function createTrip(trip, callback) {
-      console.log(trip);
       $http.post('/trips', {
-        user: currentUser,
+        id: currentUser,
         name: trip.name,
         code: trip.code
       })
@@ -46,12 +45,12 @@
 
     function hasTrip(callback) {
       $http.get('/trips', {
-        params: { user: currentUser }
+        params: { id: currentUser }
       })
       .then( function (res) {
         // currentTripData = res.data[0];
-        cacheTrip(res.data[0]);
-        callback(res.data[0]);
+        cacheTrip(res.data);
+        callback(res.data);
       });
     }
 
