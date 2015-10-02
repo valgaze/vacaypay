@@ -2,7 +2,7 @@ var tripController = require('./tripController.js');
 
 module.exports = function (app) {
 
-	app.get('/:id', tripController.getCurrentTrip);
+	app.get('/', tripController.getCurrentTrip);
 	app.post('/', tripController.createTrip);
 	app.post('/join', tripController.joinTrip);
 	app.post('/expense', tripController.addExpense);
