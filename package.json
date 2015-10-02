@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "json-server --watch db.json --static ./client",
-    "test": "./node_modules/.bin/mocha --reporter nyan test/server/ServerSpec.js test/server/MongoSpec.js"
+    "test": "./node_modules/.bin/mocha --reporter nyan test/server/ServerSpec.js"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
