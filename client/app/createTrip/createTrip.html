@@ -1,8 +1,34 @@
 <div id="createTrip" class="modal-header">
-  <h3 class="modal-title">Start a Trip</h3>
-  <form ng-submit="createTrip()" ng-model="trip">
-    <input ng-model="trip.name" type="text" placeholder="trip name" />
-    <input ng-model="trip.code" type="text" placeholder="password"/>
-    <button type="submit">Submit</button>
+<div class="form-group col-sm-offset-2  col-sm-10">
+  <h3 class="modal-title">Create a New Trip</h3>
+</div>
+  <form class="form-horizontal" ng-submit="createTrip()">
+    <div class="form-group">
+      <label for="tripName" class="col-sm-2 control-label">Name</label>
+      <div class="col-sm-10">
+        <input ng-model="trip.name" type="text" class="form-control"
+        placeholder="Enter your trip name here"
+        maxlength="30"
+        required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="tripCode" class="col-sm-2 control-label">Code</label>
+      <div class="col-sm-10">
+        <input ng-model="trip.code" type="text" class="form-control"
+        placeholder="Create a secret code"
+        maxlength="20"
+        required
+        tooltip="Create a secret trip passcode so that only your friends will be able to join this trip."
+        tooltip-placement="bottom"
+        tooltip-trigger="focus"
+        tooltip-enable="!trip.code" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+    </div>
   </form>
 </div>
