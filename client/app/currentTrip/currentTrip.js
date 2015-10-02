@@ -7,18 +7,17 @@
 
     $scope.hasTrip = function () {
       Trip.hasTrip( function (data) {
-        $scope.data = data[0];
-        console.log(data);
-        console.log('has trip?');
+        $scope.data = data;
+        console.log($scope.data.name);
         if (!$scope.data.name) {
-          $state.transitionTo("fallback")
+          $state.transitionTo('fallback');
         }
       });
-    }
+    };
 
     $scope.hasTrip();
 
 
-  })
+  });
   
 })();
