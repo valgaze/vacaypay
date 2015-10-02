@@ -4,10 +4,13 @@
   .factory('Trip', function ($http, $cacheFactory, Auth) {
 
     var currentUser = Auth.currentUser;
+    var cache = $cacheFactory('tripData');
+    // var currentTripData;
 
     var services = {
       createTrip: createTrip,
       cacheTrip: cacheTrip,
+      // currentTrip: currentTrip,
       hasTrip: hasTrip
     };
 
@@ -21,14 +24,14 @@
         code: trip.code
       })
       .then(function (res) {
+        // currentTripData = res.data;
         cacheTrip(res.data);
         callback();
       });
     }
 
     function cacheTrip (trip) {
-      var cache = $cacheFactory('tripData');
-      cache.put('_id', trip._id);
+      cache.put('_id', trip.id);
       cache.put('creator', trip.creator);
       cache.put('participants', trip.participants);
       cache.put('name', trip.name);
@@ -37,13 +40,18 @@
       return cache;
     }
 
+    // function currentTrip() {
+    //   return currentTripData;
+    // }
+
     function hasTrip(callback) {
       $http.get('/trips', {
         params: { user: currentUser }
       })
       .then( function (res) {
-        cacheTrip(res.data);
-        callback(res.data);
+        // currentTripData = res.data[0];
+        cacheTrip(res.data[0]);
+        callback(res.data[0]);
       });
     }
 
