@@ -131,17 +131,17 @@ describe('Server Tests', function() {
           code: 'Random',
           expenses: []
         }, function(err, trip){
-        
-        user.currentTrip = trip._id;
-        user.save(function(err, result){
           request(app)
-          .get('/trips/' + user._id)
-          .expect(200)
-          .expect(function(res) {
-            expect(res.body.name).to.equal('Random');
-          })
-          .end(done);
-          });
+            .post('/trips/join')
+            .send({
+              id: user._id,
+              code: 'Random'
+            })
+            .expect(200)
+            .expect(function(result){
+              expect(result.body.participants.length).to.equal(2);
+            })
+            .end(done);
         });
       });
     });
