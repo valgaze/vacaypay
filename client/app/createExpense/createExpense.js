@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
-  .controller('CreateExpenseController', function ($scope, $modalInstance, $state, $cacheFactory, Expenses) {
+  .controller('CreateExpenseController', function ($scope, $rootScope, $modalInstance, $state, $cacheFactory, Expenses) {
     var cache = $cacheFactory.get('tripData');
 
     $scope.expense = {};
@@ -21,8 +21,10 @@
 
     $scope.addExpense = function () {
       Expenses.addExpense($scope.expense, $scope.stakeholders, function () {
+        console.log('expense added');
+        $rootScope.$broadcast('displayExpense');
+        $state.transitionTo('currentTrip.expense');
         $modalInstance.dismiss('Expense has been added');
-        $state.transitionTo('expense');
       });
     };
 

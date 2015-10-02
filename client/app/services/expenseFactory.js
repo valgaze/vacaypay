@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
- .factory('Expenses', function ($http, Auth) {
+ .factory('Expenses', function ($http, $window, Auth) {
     var services = {
       allExpenses: allExpenses,
       addExpense: addExpense
@@ -19,8 +19,8 @@
 
     function addExpense (expense, stakeholders, callback) {
       $http.post('/trips/expense', {
-        user: Auth.currentUser(),
-        amount: expense.cost,
+        id: $window.localStorage.getItem('userId'),
+        amount: expense.amount,
         name: expense.name,
         stakeholders: stakeholders
       }).then(function (res) {

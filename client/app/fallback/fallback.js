@@ -2,7 +2,9 @@
   'use strict';
 
   angular.module('app')
-  .controller('FallbackController', function ($scope, $modal, $state, Trip) {
+  .controller('FallbackController', function ($scope, $http, $modal, $state, Trip) {
+
+    $scope.tripCode = "";
 
     $scope.open = function() {
       var modalInstance = $modal.open({
@@ -11,6 +13,12 @@
         controller: 'CreateTripController'
       });
     };
+
+    $scope.joinTrip = function() {
+      Trip.joinTrip($scope.tripCode, function() {
+        $state.transitionTo('currentTrip.expense');
+      });
+    }
 
     $scope.hasTrip = function () {
       Trip.hasTrip( function (data) {
