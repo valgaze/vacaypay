@@ -24,9 +24,9 @@
         templateUrl: 'app/createExpense/createExpense.html',
         controller: 'CreateExpenseController'
       });
-      modalInstance.result.then(function() {
-        console.log('after modal open');
-        $scope.getExpenses();
+
+      modalInstance.result.then(function(expenses) {
+        $scope.data.expenses = expenses;
       });
     };
   })

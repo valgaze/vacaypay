@@ -34,12 +34,14 @@
       $scope.stakeholders = $scope.stakeholders.map(function(stakeholder) {
         return { id: stakeholder.id, username: stakeholder.label };
       });
-      Expenses.addExpense($scope.expense, $scope.stakeholders, function () {
+      Expenses.addExpense($scope.expense, $scope.stakeholders, function (tripData) {
         console.log('expense added');
-        $rootScope.$broadcast('displayExpense');
-        $state.transitionTo('currentTrip.expense');
-        $modalInstance.dismiss('Expense has been added');
+        $modalInstance.close(tripData.expenses);
       });
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
     };
 
   });
