@@ -26,21 +26,27 @@
         $scope.tripExpense = data.expenses;
         console.log($scope.tripData);
 
+        // reference is used to keep track of + and - as we iterate through expenses
+        // result is the summary for users (who should pay how much)
         for (var i = 0; i < $scope.participants.length; i++) {
           reference[$scope.participants[i]['id']] = 0;
           result[$scope.participants[i]['id']] = {};
         }
 
+        // Loop through all expense
         for (var k = 0; k < $scope.tripExpense.length; k++) {
           var payer = $scope.tripExpense[k].payer;
           var stakeholders = $scope.tripExpense[k].stakeholders;
           var amount = $scope.tripExpense[k].amount;
+          // Add + for how much payer should receive
           reference[payer.id] += amount;
+          // Split the payment among stakeholders as -
           for (var l = 0; l < stakeholders.length; l++) {
             reference[stakeholders[l].id] -= amount/stakeholders.length;
           }
         }
 
+        // Makes list of key-value pair from reference
         for (var keys in reference) {
           matrix.push([keys, reference[keys]]);
         }
@@ -49,20 +55,32 @@
           return a[1] - b[1];
         });
 
-        while(matrix[0][1] < 0){
-          matrix[matrix.length - 1][1] += matrix[0][1];
+        // While the lowest has debt less than 0 (implying that we are not even yet),
+        // continue to make someone pay off the debt.
+        // This part can be improved by implementing a helper function that finds minimum and maximum
+        // instead of sorting, which is what we are doing right now.
+        // I feel lazy
+        while(matrix[0][1] < -0.000000001){
+          // Most 'broke' person tries to pay out to the richest person as much as possible.
+          if(matrix[matrix.length - 1][1] > -1*matrix[0][1]){
+            result[matrix[0][0]][matrix[matrix.length-1][1]] = -1*matrix[0][1]
+            matrix[matrix.length - 1][1] += matrix[0][1];
+            matrix[0][1] = 0
+          } else {
+            result[matrix[0][0]][matrix[matrix.length-1][1]] = matrix[matrix.length - 1][1]
+            matrix[0][1] += matrix[matrix.length - 1][1]
+            matrix[matrix.length - 1][1] = 0;
+          }
 
+          // After payment, sort to find min and max
           matrix.sort( function (a, b) {
             return a[1] - b[1];
           });
         }
 
-
+        // Now result is an object representing what user should pay which user how much
 
       })
     };
-
-
   });
-  
 })();

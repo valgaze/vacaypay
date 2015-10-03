@@ -9,6 +9,12 @@ module.exports = {
 		var id = req.query.id;
 		User.findById(id, function(err, user){
 			Trip.findById(user.currentTrip, function(err, currenttrip){
+				if(currenttrip === null){
+					user.currentTrip = null;
+					user.save(err, function(){
+						res.status(200).send(currenttrip).end();
+					})
+				}
 				res.status(200).send(currenttrip).end();
 			})
 		})
@@ -109,7 +115,18 @@ module.exports = {
 
 	// Replicate current trip to old trip and then delete current trip 
 	endTrip: function(req, res){
+		//
+		var id = req.body._id;
+		var data = req.body;
+		delete data._id;
+		PastTrip.create(data, function(err, past){
+			if(err) console.log('error creating past trip');
 
+			Trip.findByIdAndRemove(id, function(err, result){
+				if (err) console.log(err);
+				res.status(201).end();
+			});
+		})
 	},
 
 	// Get the most recent finished trip of requested user
