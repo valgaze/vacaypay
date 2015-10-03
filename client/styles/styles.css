@@ -2,11 +2,17 @@ body {
   background-color: #f8f8f8;
 }
 
-h1,
+h2,
 h5 {
   font-weight: normal;
   color: #d32f2f;
   text-align: center;
+}
+
+h1 {
+  font-weight: normal;
+  color: #d32f2f;
+  display: inline-block;
 }
 
 /* BUTTONS */
@@ -53,6 +59,26 @@ h5 {
 
 .jumbotron p {
   font-size: 18px;
+}
+
+/* CURRENT TRIP PAGE */
+
+.creator {
+  color: #727272;
+}
+
+.endTrip {
+  margin-top: 2.5rem;
+}
+
+.expenseBtn {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.panel-heading {
+  border: 1px solid #d32f2f !important;
+  border-radius: 0;
 }
 
 /*  NAV BAR */
