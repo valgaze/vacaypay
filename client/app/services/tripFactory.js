@@ -48,7 +48,6 @@
       cache.put('name', trip.name);
       cache.put('code', trip.code);
       cache.put('expenses', trip.expenses);
-      console.log(trip.expenses);
       return cache;
     }
 

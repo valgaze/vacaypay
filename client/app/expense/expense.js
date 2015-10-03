@@ -13,7 +13,6 @@
         Trip.cacheTrip(data);
         var cache = $cacheFactory.get('tripData');
         $scope.data.expenses = cache.get('expenses');
-        console.log($scope.data.expenses);
       });
     };
     
