@@ -3,10 +3,10 @@
 	<div ng-controller="ExpenseAccordionController">
 	  <accordion close-others="oneAtATime">
 	    <accordion-group heading="{{expense.name}}" ng-repeat="expense in data.expenses">
-	      <p>{{ expense.payer }} paid ${{ expense.amount }} for {{ expense.name }}.</p>
+	      <p>{{ expense.payer.username }} paid ${{ expense.amount }} for {{ expense.name }}.</p>
 	      <p>Friends that are splitting the cost:</p>
 	      <ul>
-	      	<li ng-repeat="friend in expense.stakeholders">{{ friend.id }}</li>
+	      	<li ng-repeat="friend in expense.stakeholders">{{ friend.username }}</li>
 	      </ul>
 	    </accordion-group>
 	  </accordion>
