@@ -24,7 +24,7 @@
         name: expense.name,
         stakeholders: stakeholders
       }).then(function (res) {
-        callback();
+        callback(res.data);
       });
     }
 
