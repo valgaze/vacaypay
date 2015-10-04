@@ -7,12 +7,18 @@ var Schema = mongoose.Schema;
 
 var PastTripSchema = new Schema({
 	creator: {
-		type: Schema.Types.ObjectId,
-		ref: 'User'
+		id:{
+			type: Schema.Types.ObjectId,
+			ref: 'User'
+		}, 
+		username: {type: String}
 	},
 	participants: [{
-		type: Schema.Types.ObjectId,
-		ref: 'User'
+		id:{
+			type: Schema.Types.ObjectId,
+			ref: 'User'
+		}, 
+		username: {type: String}
 	}],
 	name: {
 		type: String,
@@ -28,24 +34,36 @@ var PastTripSchema = new Schema({
 			name: String,
 			amount: Number,
 			payer: {
-				type: Schema.Types.ObjectId,
-				ref: 'User'
+				id:{
+					type: Schema.Types.ObjectId,
+					ref: 'User'
+				}, 
+				username: {type: String}
 			},
 			stakeholders: [{
-				type: Schema.Types.ObjectId,
-				ref: 'User'
+				id:{
+					type: Schema.Types.ObjectId,
+					ref: 'User'
+				}, 
+				username: {type: String}
 			}],
 		}
 	],
 	summary: [{
 		payer: {
+		id:{
 			type: Schema.Types.ObjectId,
 			ref: 'User'
-		},
+		}, 
+		username: {type: String}
+	},
 		payee: {
+		id:{
 			type: Schema.Types.ObjectId,
 			ref: 'User'
-		},
+		}, 
+		username: {type: String}
+	},
 		amount: Number
 	}]
 });
