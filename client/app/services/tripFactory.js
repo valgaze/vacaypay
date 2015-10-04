@@ -11,6 +11,7 @@
       createTrip: createTrip,
       cacheTrip: cacheTrip,
       joinTrip: joinTrip,
+      getRecentTrip: getRecentTrip,
       // currentTrip: currentTrip,
       hasTrip: hasTrip
     };
@@ -62,6 +63,15 @@
       .then( function (res) {
         // currentTripData = res.data[0];
         cacheTrip(res.data);
+        callback(res.data);
+      });
+    }
+
+    function getRecentTrip(callback) {
+      $http.get('/trips/recent', {
+        params: { id: currentUser }
+      })
+      .then(function(res) {
         callback(res.data);
       });
     }
