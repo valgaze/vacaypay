@@ -26,8 +26,7 @@ var PastTripSchema = new Schema({
 	},
 	code: {
 		type: String,
-		required: true,
-		unique: true
+		required: true
 	},
 	expenses: [
 		{
@@ -49,7 +48,12 @@ var PastTripSchema = new Schema({
 			}],
 		}
 	],
-	summary: []
+	summary: [{
+		username: {
+			type: String
+		},
+		payee: {}
+	}]
 });
 
 module.exports = mongoose.model('pasttrips', PastTripSchema);

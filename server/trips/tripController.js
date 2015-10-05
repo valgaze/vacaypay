@@ -157,11 +157,13 @@ module.exports = {
 	endTrip: function(req, res){
 		var id = req.body._id;
 		var data = req.body;
+		console.log(data);
 		delete data._id;
 		// Create past trip according to given trip info
 		PastTrip.create(data, function(err, past){
 			if(err){	// Past trip creation error handling
 				console.log('error creating past trip');
+				console.log(err);
 				res.status(500).end();
 				return;
 			} 
@@ -182,7 +184,7 @@ module.exports = {
 	getRecent: function(req, res){
 		var id = req.query.id;
 		// Find past trip
-		PastTrip.find({participants:id})
+		PastTrip.find({},{participants:id})
 			.sort('-_id')
 			.limit(10)
 			.exec(function(err, data){
@@ -191,8 +193,16 @@ module.exports = {
 					res.status(500).end();
 					return;
 				}
-				res.status(200).send(data[0]).end();
-				return;
+				PastTrip.findById(data[0]._id, function (err, data) {
+					if(err) {
+						console.log('Trip not found after finding user');
+						res.status(500).end();
+						return;
+					}
+					console.log(data);
+					res.status(200).send(data).end();
+					return;
+				});
 			});
 	}
 }
