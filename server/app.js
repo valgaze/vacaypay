@@ -1,7 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var favicon = require('serve-favicon');
-var 
 
 var app = express();
 
