@@ -13,9 +13,11 @@ module.exports = {
 					user.currentTrip = null;
 					user.save(err, function(){
 						res.status(200).send(currenttrip).end();
+						return;
 					})
 				}
 				res.status(200).send(currenttrip).end();
+				return;
 			})
 		})
 	},
@@ -30,6 +32,7 @@ module.exports = {
 			if(err) {
 				console.log('User not found');
 				res.status(404).end();
+				return;
 			}
 			Trip.create({
 				creator: {id: user._id, username: user.username},
@@ -41,10 +44,12 @@ module.exports = {
 				if(err) {
 					console.log('code is already taken');
 					res.status(422).end();
+					return;
 				}
 				user.currentTrip = newTrip._id;
 				user.save( function (err, result) {
 					res.status(201).send(newTrip).end();
+					return;
 				});
 			});
 		})
@@ -60,11 +65,14 @@ module.exports = {
 			if(err){
 				console.log('Such code does not exist');
 				res.status(404).end('Such code does not exist');
+				return;
 			}
 
 			User.findById(id, function(err, user){
 				if(err){
 					console.log('couldn\'t find user for some reason');
+					res.status(404).end('User not found');
+					return;
 				}
 				user.currentTrip = trip._id;
 				trip.participants.push({id: user._id, username: user.username});
@@ -72,9 +80,11 @@ module.exports = {
 					if (err) {
 						console.log('Problem updating trip');
 						res.status(500).send(trip).end();
+						return;
 					}
 					user.save(function(err, userresult){
 						res.status(200).send(tripresult).end();
+						return;
 					})
 				});
 			});
@@ -94,6 +104,7 @@ module.exports = {
 				if(err) {
 					console.log('Trip with given user as participant not found');
 					res.status(404).end();
+					return
 				}
 
 				var newExpense = {
@@ -108,6 +119,7 @@ module.exports = {
 				trip.save(function(err, trip){
 					if(err) console.log('Error saving trip');
 					res.status(201).send(trip).end();
+					return;
 				});
 			});
 		});
@@ -115,16 +127,20 @@ module.exports = {
 
 	// Replicate current trip to old trip and then delete current trip 
 	endTrip: function(req, res){
-		//
 		var id = req.body._id;
 		var data = req.body;
 		delete data._id;
 		PastTrip.create(data, function(err, past){
-			if(err) console.log('error creating past trip');
+			if(err){
+				console.log('error creating past trip');
+				res.status(500).end();
+				return;
+			} 
 
 			Trip.findByIdAndRemove(id, function(err, result){
 				if (err) console.log(err);
 				res.status(201).end();
+				return;
 			});
 		})
 	},
@@ -138,8 +154,10 @@ module.exports = {
 			if(err){
 				console.log('Trip with user as participant not found');
 				res.status(500).end();
+				return;
 			}
 			res.status(200).send(trip).end();
+			return;
 		})
 	}
 }
