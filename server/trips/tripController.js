@@ -30,13 +30,14 @@ module.exports = {
 						}
 						res.status(200).send(currenttrip).end();
 						return;
-					})
+					});
+				} else {
+					// If the current trip is found, send it back to user
+					res.status(200).send(currenttrip).end();
+					return;
 				}
-				// If the current trip is found, send it back to user
-				res.status(200).send(currenttrip).end();
-				return;
-			})
-		})
+			});
+		});
 	},
 
 	// Input: Request containing id of requested user, name of trip, and trip code
@@ -50,7 +51,7 @@ module.exports = {
 		User.findById(id, function(err, user){
 			if(err) {	// Error handling when user is not found
 				console.log('User not found');
-				console.log(err)
+				console.log(err);
 				res.status(404).end();
 				return;
 			}
@@ -81,7 +82,7 @@ module.exports = {
 					return;
 				});
 			});
-		})
+		});
 	},
 
 	// Input: id of user and code of trip that the user wishes to join
@@ -127,7 +128,7 @@ module.exports = {
 						}
 						res.status(200).send(tripresult).end();
 						return;
-					})
+					});
 				});
 			});
 		});
@@ -163,7 +164,7 @@ module.exports = {
 					amount: amount,
 					payer: {id: user._id, username: user.username},
 					stakeholders: stakeholders
-				}
+				};
 				// Update expense in trip
 				trip.expenses.push(newExpense);
 				// Save update
@@ -206,7 +207,7 @@ module.exports = {
 				res.status(201).end();
 				return;
 			});
-		})
+		});
 	},
 
 	// Input: Request body with if of requested user
@@ -236,4 +237,4 @@ module.exports = {
 				});
 			});
 	}
-}
+};

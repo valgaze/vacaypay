@@ -2,9 +2,10 @@
   'use strict';
 
   angular.module('app')
-  .controller('FallbackController', function ($scope, $http, $modal, $state, Trip, Auth) {
+  .controller('FallbackController', ['$scope', '$http', '$modal', '$state', 'Trip', 'Auth',
+  function ($scope, $http, $modal, $state, Trip, Auth) {
 
-    $scope.tripCode = "";
+    $scope.tripCode = '';
     $scope.recentTrip;
     $scope.totalExpenses;
     $scope.hasRecentTrip = false;
@@ -25,7 +26,7 @@
       Trip.joinTrip($scope.tripCode, function() {
         $state.transitionTo('currentTrip.expense');
       });
-    }
+    };
 
     $scope.hasTrip = function () {
       Trip.hasTrip( function (data) {
@@ -44,15 +45,15 @@
           $scope.hasRecentTrip = true;
         }
       });
-    }
+    };
 
     var totalExpenses = function() {
       $scope.totalExpenses =  $scope.recentTrip.expenses.reduce(function(total, current) {
         return total + parseInt(current.amount);
       }, 0);
-    }
+    };
 
     $scope.hasTrip();
     $scope.getRecentTrip();
-  });
+  }]);
 })();

@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
-  .factory('Auth', function ($http, $state, $window) {
+  .factory('Auth', ['$http', '$state', '$window', function ($http, $state, $window) {
     var currentUserId;
     var currentUserName;
 
@@ -56,5 +56,5 @@
       $state.transitionTo('signin');
     }
 
-  });
+  }]);
 })();

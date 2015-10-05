@@ -2,7 +2,8 @@
   'use strict';
 
   angular.module('app')
-  .controller('CurrentTripController', function ($scope, $location, $state, Trip, Auth) {
+  .controller('CurrentTripController', ['$scope', '$location', '$state', 'Trip', 'Auth',
+  function ($scope, $location, $state, Trip, Auth) {
     $scope.currentTrip = {};
 
     $scope.logout = function() {
@@ -98,5 +99,5 @@
         });
       });
     };
-  });
+  }]);
 })();

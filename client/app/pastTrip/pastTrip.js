@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
-  .controller('PastTripController', function ($scope, PastTrips) {
+  .controller('PastTripController', ['$scope', 'PastTrips', function ($scope, PastTrips) {
     $scope.data = {};
 
     $scope.getPastTrips = function() {
@@ -13,10 +13,9 @@
     };
     $scope.getPastTrips();
 
-  })
+  }])
   
-  .controller('PastTripAccordionController', function ($scope) {
+  .controller('PastTripAccordionController', ['$scope', function ($scope) {
     $scope.oneAtATime = false;
-  });
-
+  }]);
 })();

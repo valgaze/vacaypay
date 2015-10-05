@@ -2,7 +2,8 @@
   'use strict';
 
   angular.module('app')
-  .controller('CreateExpenseController', function ($scope, $rootScope, $window, $modalInstance, $state, $cacheFactory, Expenses, Auth) {
+  .controller('CreateExpenseController', ['$scope', '$rootScope', '$window', '$modalInstance', '$state', '$cacheFactory', 'Expenses', 'Auth',
+  function ($scope, $rootScope, $window, $modalInstance, $state, $cacheFactory, Expenses, Auth) {
     var cache = $cacheFactory.get('tripData');
 
     $scope.expense = {};
@@ -50,7 +51,5 @@
     $scope.cancel = function () {
       $modalInstance.dismiss('cancel');
     };
-
-  });
-  
+  }]);
 })();
