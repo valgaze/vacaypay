@@ -11,8 +11,9 @@ module.exports = {
 		User.findById(id, function(err, user){
 			if(err){	// Error handling for user not found
 				console.log('User not found');
-				console.log(err)
+				console.log(err);
 				res.status(404).end();
+				return;
 			}
 			// Find trip by id contained by current trip of found user
 			Trip.findById(user.currentTrip, function(err, currenttrip){
@@ -24,6 +25,8 @@ module.exports = {
 						if(err){
 							console.log('error saving user');
 							console.log(err);
+							res.status(500).end();
+							return;
 						}
 						res.status(200).send(currenttrip).end();
 						return;
@@ -47,6 +50,7 @@ module.exports = {
 		User.findById(id, function(err, user){
 			if(err) {	// Error handling when user is not found
 				console.log('User not found');
+				console.log(err)
 				res.status(404).end();
 				return;
 			}
@@ -60,12 +64,19 @@ module.exports = {
 			}, function(err, newTrip){
 				if(err) {	// Error handling for code that's already taken
 					console.log('code is already taken');
+					console.log(err)
 					res.status(422).end();
 					return;
 				}
 				// Set the current trip of creator to the newly created trip
 				user.currentTrip = newTrip._id;
 				user.save( function (err, result) {	// Save edited current trip info of user
+					if(err){
+						console.log('error saving user');
+						console.log(err);
+						res.status(500).end();
+						return;
+					}
 					res.status(201).send(newTrip).end();
 					return;
 				});
@@ -83,6 +94,7 @@ module.exports = {
 		Trip.findOne({code:code}, function(err, trip){
 			if(err){	// Error handling for non-existent trip
 				console.log('Such code does not exist');
+				console.log(err);
 				res.status(404).end('Such code does not exist');
 				return;
 			}
@@ -90,6 +102,7 @@ module.exports = {
 			User.findById(id, function(err, user){
 				if(err){	// Error handling
 					console.log('couldn\'t find user for some reason');
+					console.log(err);
 					res.status(404).end('User not found');
 					return;
 				}
@@ -100,11 +113,18 @@ module.exports = {
 				trip.save(function(err, tripresult){	// Save updated info
 					if (err) {	// Error handling for trip update
 						console.log('Problem updating trip');
-						res.status(500).send(trip).end();
+						console.log(err);
+						res.status(500).end();
 						return;
 					}
 					// Save edited info
 					user.save(function(err, userresult){
+						if(err){
+							console.log('error saving user');
+							console.log(err);
+							res.status(500).end();
+							return;
+						}
 						res.status(200).send(tripresult).end();
 						return;
 					})
@@ -125,6 +145,7 @@ module.exports = {
 		User.findById(id, function(err, user){
 			if(err){ 	// Error handling for non-existent user
 				console.log('User not found');
+				console.log(err);
 				res.status(404).end();
 				return;
 			}
@@ -132,6 +153,7 @@ module.exports = {
 			Trip.findById(user.currentTrip, function(err, trip){
 				if(err) {
 					console.log('Trip with given user as participant not found');
+					console.log(err);
 					res.status(404).end();
 					return;
 				}
@@ -148,7 +170,9 @@ module.exports = {
 				trip.save(function(err, trip){
 					if(err) {	// Error handling for save
 						console.log('Error saving trip');
+						console.log(err);
 						res.status(500).end();
+						return;
 					}
 					res.status(201).send(trip).end();
 					return;
@@ -175,7 +199,9 @@ module.exports = {
 			Trip.findByIdAndRemove(id, function(err, result){
 				if (err) {	// Error handling for trip find removal failure
 					console.log('could not delete trip');
+					console.log(err);
 					res.status(500).end();
+					return;
 				}
 				res.status(201).end();
 				return;
@@ -200,6 +226,7 @@ module.exports = {
 				PastTrip.findById(data[0]._id, function (err, data) {
 					if(err) {
 						console.log('Trip not found after finding user');
+						console.log(err);
 						res.status(500).end();
 						return;
 					}
