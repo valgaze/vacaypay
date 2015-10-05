@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
-  .controller('FallbackController', function ($scope, $http, $modal, $state, Trip) {
+  .controller('FallbackController', function ($scope, $http, $modal, $state, Trip, Auth) {
 
     $scope.tripCode = "";
     $scope.recentTrip;
