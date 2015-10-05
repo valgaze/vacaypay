@@ -34,7 +34,6 @@
 
     $scope.getRecentTrip = function () {
       Trip.getRecentTrip(function (mostRecentTrip) {
-        console.log(mostRecentTrip);
         if (mostRecentTrip) {
           $scope.recentTrip = mostRecentTrip;
           totalExpenses();

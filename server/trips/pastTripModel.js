@@ -49,7 +49,7 @@ var PastTripSchema = new Schema({
 			}],
 		}
 	],
-	summary: {}
+	summary: []
 });
 
 module.exports = mongoose.model('pasttrips', PastTripSchema);

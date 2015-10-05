@@ -76,23 +76,19 @@
           });
         }
         // Now result is an object representing what user should pay which user how much
-        var resultObj = {}
-        console.log(result);
+        var resultArr = [];
         for(var keys in result) {
           var payerName = keys.split(',')[1];
           for(var innerKeys in result[keys]) {
-            console.log(result[keys][innerKeys]);
             var payeeName = innerKeys.split(',')[1];
-            resultObj.payer = { username: payerName,
+            resultArr.push({ username: payerName,
                                 payee: {
                                   username: payeeName,
                                   amount: result[keys][innerKeys]
-                                }};
+                                }});                     
           }
         }
-        console.log(resultObj);
-        $scope.tripData.summary = resultObj;
-        console.log($scope.tripData);
+        $scope.tripData.summary = resultArr;
         Trip.endTrip($scope.tripData, function () {
           $state.transitionTo('fallback');
         });
