@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
- .factory('PastTrips', function ($http) {
+ .factory('PastTrips', ['$http', function ($http) {
     var services = {
       allPastTrips: allPastTrips
     };
@@ -16,5 +16,5 @@
       });
     }
 
-  });
+  }]);
 })();

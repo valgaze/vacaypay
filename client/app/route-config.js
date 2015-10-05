@@ -2,7 +2,8 @@
   'use strict';
 
   angular.module('app')    
-  .config(function($stateProvider, $urlRouterProvider, $httpProvider){
+  .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 
+  function($stateProvider, $urlRouterProvider, $httpProvider){
       
     // For any unmatched url, send to /route1
     $urlRouterProvider.otherwise('/currentTrip');
@@ -48,8 +49,8 @@
   // We add our $httpInterceptor into the array
   // of interceptors. Think of it like middleware for your ajax calls
   $httpProvider.interceptors.push('AttachTokens');
-  })
-  .factory('AttachTokens', function ($window) {
+  }])
+  .factory('AttachTokens', ['$window', function ($window) {
     // this is an $httpInterceptor
     // its job is to stop all out going request
     // then look in local storage and find the user's token
@@ -65,8 +66,8 @@
       }
     };
     return attach;
-  })
-  .run(function ($rootScope, $state, Auth) {
+  }])
+  .run(['$rootScope', '$state', 'Auth', function ($rootScope, $state, Auth) {
     // here inside the run phase of angular, our services and controllers
     // have just been registered and our app is ready
     // however, we want to make sure the user is authorized
@@ -77,9 +78,8 @@
     $rootScope.$on('$stateChangeStart', function (evt, toState) {
       if (toState.authenticate && !Auth.isAuth()) {
         evt.preventDefault();
-        $state.transitionTo("signin");
+        $state.transitionTo('signin');
       }
     });
-  });
-
+  }]);
 })();

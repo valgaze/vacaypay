@@ -2,7 +2,8 @@
   'use strict';
 
   angular.module('app')
-  .controller('ExpenseController', function ($scope, $modal, $cacheFactory, Trip) {
+  .controller('ExpenseController', ['$scope', '$modal', '$cacheFactory', 'Trip',
+  function ($scope, $modal, $cacheFactory, Trip) {
 
     $scope.data = {};
 
@@ -29,10 +30,9 @@
         $scope.data.expenses = expenses;
       });
     };
-  })
+  }])
   
-  .controller('ExpenseAccordionController', function ($scope) {
+  .controller('ExpenseAccordionController', ['$scope', function ($scope) {
     $scope.oneAtATime = false;
-  });
-
+  }]);
 })();

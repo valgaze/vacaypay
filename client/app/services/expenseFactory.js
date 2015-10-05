@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
- .factory('Expenses', function ($http, $window, Auth) {
+ .factory('Expenses', ['$http', '$window', 'Auth', function ($http, $window, Auth) {
     var services = {
       allExpenses: allExpenses,
       addExpense: addExpense
@@ -28,5 +28,5 @@
       });
     }
 
-  });
+  }]);
 })();

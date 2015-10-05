@@ -2,7 +2,8 @@
   'use strict';
 
   angular.module('app')
-  .controller('CreateTripController', function ($scope, $location, $modalInstance, $state, Trip) {
+  .controller('CreateTripController', ['$scope', '$location', '$modalInstance', '$state', 'Trip',
+  function ($scope, $location, $modalInstance, $state, Trip) {
     $scope.trip = {};
     $scope.createTrip = function() {
       Trip.createTrip($scope.trip, function() {
@@ -11,7 +12,5 @@
         $state.transitionTo('currentTrip.expense'); 
       });
     };
-
-  });
-
+  }]);
 })();

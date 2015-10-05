@@ -14,7 +14,19 @@ module.exports = function(grunt) {
       concat: {
         client: {
           src: [
-            'client/app/**/*.js'
+            'client/app/app.js',
+            'client/app/auth/auth.js',
+            'client/app/fallback/fallback.js',
+            'client/app/createTrip/createTrip.js',
+            'client/app/currentTrip/currentTrip.js',
+            'client/app/expense/expense.js',
+            'client/app/createExpense/createExpense.js',
+            'client/app/pastTrip/pastTrip.js',
+            'client/app/route-config.js',
+            'client/app/services/authFactory.js',
+            'client/app/services/expenseFactory.js',
+            'client/app/services/tripFactory.js',
+            'client/app/services/pastTripFactory.js'
           ],
           dest: 'client/dist/client.js'
         },

@@ -1,7 +1,8 @@
 (function() {
   'use strict';
   angular.module('app')
-  .factory('Trip', function ($http, $cacheFactory, $window, Auth) {
+  .factory('Trip', ['$http', '$cacheFactory', '$window', 'Auth', 
+  function ($http, $cacheFactory, $window, Auth) {
 
     var currentUser = $window.localStorage.getItem('userId');
     var cache = $cacheFactory('tripData');
@@ -79,9 +80,5 @@
         callback();
       });
     }
-
-
-  });
-
-
+  }]);
 })();
