@@ -31,4 +31,41 @@
   </div>
 
   <hr>
+
+  <div class="jumbotron" ng-show="hasRecentTrip">
+    <h2>Details from your most recent trip...</h2>
+    <tabset justified="true">
+
+      <tab heading="Overview">
+        <h3>{{ recentTrip.name }}</h3>
+        <p>This trip was created by {{ recentTrip.creator.username }}.</p>
+        <p>There were {{ recentTrip.expenses.length }} expenses totaling {{ totalExpenses | currency }}.</p>
+        <p>Here are your friends who were a part of this trip:</p>
+        <ul>
+          <li ng-repeat="friend in recentTrip.participants"><p>{{ friend.username }}</p></li>
+        </ul>
+      </tab>
+
+      <tab heading="Expenses">
+        <div>
+          <accordion close-others="oneAtATime">
+            <accordion-group heading="{{ expense.payer.username }} paid for {{expense.name}}" ng-repeat="expense in recentTrip.expenses">
+              <p>{{ expense.amount | currency }} was split among:</p>
+              <ul>
+                <li ng-repeat="friend in expense.stakeholders">{{ friend.username }}</li>
+              </ul>
+            </accordion-group>
+          </accordion>
+        </div>
+      </tab>
+
+      <tab heading="Settle Out">
+        <ul>
+          <li ng-repeat="transaction in recentTrip.summary"><p>{{ transaction.payer.username }} owes {{ transaction.payee.username }} {{ transaction.amount | currency }}.</p></li>
+        </ul>
+      </tab>
+
+    </tabset>
+
+  </div>
 </div>

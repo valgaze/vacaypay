@@ -5,6 +5,9 @@
   .controller('FallbackController', function ($scope, $http, $modal, $state, Trip) {
 
     $scope.tripCode = "";
+    $scope.recentTrip;
+    $scope.totalExpenses;
+    $scope.hasRecentTrip = false;
 
     $scope.open = function() {
       var modalInstance = $modal.open({
@@ -29,6 +32,24 @@
       });
     };
 
+    $scope.getRecentTrip = function () {
+      Trip.getRecentTrip(function (mostRecentTrip) {
+        console.log(mostRecentTrip);
+        if (mostRecentTrip) {
+          $scope.recentTrip = mostRecentTrip;
+          totalExpenses();
+          $scope.hasRecentTrip = true;
+        }
+      });
+    }
+
+    var totalExpenses = function() {
+      $scope.totalExpenses =  $scope.recentTrip.expenses.reduce(function(total, current) {
+        return total + parseInt(current.amount);
+      }, 0);
+    }
+
     $scope.hasTrip();
+    $scope.getRecentTrip();
   });
 })();
