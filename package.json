@@ -5,7 +5,7 @@
   "scripts": {
     "start": "json-server --watch db.json --static ./client",
     "test": "./node_modules/.bin/mocha --reporter nyan test/server/ServerSpec.js",
-    "postinstall": "./node_modules/bower/bin/bower install"
+    "postinstall": "./node_modules/bower/bin/bower install && ./node_modules/.bin/grunt build"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -16,6 +16,7 @@
     "debug": "~2.2.0",
     "express": "^4.13.3",
     "fs": "0.0.2",
+    "grunt-cli": "^0.1.13",
     "http": "0.0.0",
     "https": "^1.0.0",
     "jade": "~1.11.0",
