@@ -25,7 +25,7 @@ module.exports = {
 						if(err){
 							console.log('error saving user');
 							console.log(err);
-							res.status(500).end();
+							res.status(404).end();
 							return;
 						}
 						res.status(200).send(currenttrip).end();
@@ -221,14 +221,14 @@ module.exports = {
 			.exec(function(err, data){
 				if(data.length === 0){	// Error handling for no past trip found for user
 					console.log('Trip with user as participant not found');
-					res.status(500).end();
+					res.status(404).end();
 					return;
 				}
 				PastTrip.findById(data[0]._id, function (err, data) {
 					if(err) {
 						console.log('Trip not found after finding user');
 						console.log(err);
-						res.status(500).end();
+						res.status(404).end();
 						return;
 					}
 					console.log(data);

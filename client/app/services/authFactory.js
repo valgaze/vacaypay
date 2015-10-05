@@ -53,6 +53,10 @@
 
     function signout () {
       $window.localStorage.removeItem('com.vacaypay');
+      $window.localStorage.removeItem('userId');
+      $window.localStorage.removeItem('username');
+      currentUserId = null;
+      currentUserName = null;
       $state.transitionTo('signin');
     }
 
