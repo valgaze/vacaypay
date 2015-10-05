@@ -3,12 +3,20 @@ var Trip = require('./tripModel.js');
 var PastTrip = require('./pastTripModel.js');
 
 module.exports = {
-	// TODO:
-	// Look up the database to find requested users current trip.
+	// Input: user query that contains user ID
+	// Output: Current trip of user on response body
 	getCurrentTrip: function(req, res){
 		var id = req.query.id;
+		// Look for user document referenced by ID
 		User.findById(id, function(err, user){
+			if(err){	// Error handling for user not found
+				console.log('User not found');
+				res.status(404).end();
+			}
+			// Find trip by id contained by current trip of found user
 			Trip.findById(user.currentTrip, function(err, currenttrip){
+				// If the trip doesn't exist (null/undefined), this means
+				// that the trip ended so we set it to null for user and return nothing.
 				if(currenttrip === null){
 					user.currentTrip = null;
 					user.save(err, function(){
@@ -16,24 +24,28 @@ module.exports = {
 						return;
 					})
 				}
+				// If the current trip is found, send it back to user
 				res.status(200).send(currenttrip).end();
 				return;
 			})
 		})
 	},
 
-	// Create a new trip under the user
+	// Input: Request containing id of requested user, name of trip, and trip code
+	// Output: Created trip in response body
 	createTrip: function(req, res){
 		var data = req.body;
 		var id = data.id;
 		var tripName = data.name;
 		var code = data.code;
+		// Find user by given id
 		User.findById(id, function(err, user){
-			if(err) {
+			if(err) {	// Error handling when user is not found
 				console.log('User not found');
 				res.status(404).end();
 				return;
 			}
+			// Create trip according to given info. Reference tripModel.js for schema reference
 			Trip.create({
 				creator: {id: user._id, username: user.username},
 				participants: [{id: user._id, username: user.username}],
@@ -41,13 +53,14 @@ module.exports = {
 				code: code,
 				expenses: []
 			}, function(err, newTrip){
-				if(err) {
+				if(err) {	// Error handling for code that's already taken
 					console.log('code is already taken');
 					res.status(422).end();
 					return;
 				}
+				// Set the current trip of creator to the newly created trip
 				user.currentTrip = newTrip._id;
-				user.save( function (err, result) {
+				user.save( function (err, result) {	// Save edited current trip info of user
 					res.status(201).send(newTrip).end();
 					return;
 				});
@@ -55,33 +68,37 @@ module.exports = {
 		})
 	},
 
-	// Add user to the participant list of designated trip
+	// Input: id of user and code of trip that the user wishes to join
+	// Output: response body with joined trip info
 	joinTrip: function(req, res){
 		var data = req.body;
 		var id = data.id;
 		var code = data.code;
-
+		// Find trip by code
 		Trip.findOne({code:code}, function(err, trip){
-			if(err){
+			if(err){	// Error handling for non-existent trip
 				console.log('Such code does not exist');
 				res.status(404).end('Such code does not exist');
 				return;
 			}
-
+			// Find user by given id
 			User.findById(id, function(err, user){
-				if(err){
+				if(err){	// Error handling
 					console.log('couldn\'t find user for some reason');
 					res.status(404).end('User not found');
 					return;
 				}
+				// Set current trip of user to that trip
 				user.currentTrip = trip._id;
+				// Update participant info of trip
 				trip.participants.push({id: user._id, username: user.username});
-				trip.save(function(err, tripresult){
-					if (err) {
+				trip.save(function(err, tripresult){	// Save updated info
+					if (err) {	// Error handling for trip update
 						console.log('Problem updating trip');
 						res.status(500).send(trip).end();
 						return;
 					}
+					// Save edited info
 					user.save(function(err, userresult){
 						res.status(200).send(tripresult).end();
 						return;
@@ -91,33 +108,43 @@ module.exports = {
 		});
 	},
 
-	// Add expense to the trip
+	// Input: info of expense added by user. Reference database schema for detail.
+	// Output: response body with joined trip info
 	addExpense: function(req, res){
 		var data = req.body;
 		var id = data.id;
 		var name = data.name;
 		var amount = data.amount;
 		var stakeholders = data.stakeholders;
-
+		// Find user by given id
 		User.findById(id, function(err, user){
+			if(err){ 	// Error handling for non-existent user
+				console.log('User not found');
+				res.status(404).end();
+				return;
+			}
+			// Find trip by user's current trip id property
 			Trip.findById(user.currentTrip, function(err, trip){
 				if(err) {
 					console.log('Trip with given user as participant not found');
 					res.status(404).end();
-					return
+					return;
 				}
-
+				// Nex expense object
 				var newExpense = {
 					name: name,
 					amount: amount,
 					payer: {id: user._id, username: user.username},
 					stakeholders: stakeholders
 				}
-
+				// Update expense in trip
 				trip.expenses.push(newExpense);
-
+				// Save update
 				trip.save(function(err, trip){
-					if(err) console.log('Error saving trip');
+					if(err) {	// Error handling for save
+						console.log('Error saving trip');
+						res.status(500).end();
+					}
 					res.status(201).send(trip).end();
 					return;
 				});
@@ -125,33 +152,38 @@ module.exports = {
 		});
 	},
 
-	// Replicate current trip to old trip and then delete current trip 
+	// Input: Request body with data of finalized trip data
+	// Output: 201 response from server
 	endTrip: function(req, res){
 		var id = req.body._id;
 		var data = req.body;
 		delete data._id;
+		// Create past trip according to given trip info
 		PastTrip.create(data, function(err, past){
-			if(err){
+			if(err){	// Past trip creation error handling
 				console.log('error creating past trip');
 				res.status(500).end();
 				return;
 			} 
-
+			// Once past trip is created, delete existing trip
 			Trip.findByIdAndRemove(id, function(err, result){
-				if (err) console.log(err);
+				if (err) {	// Error handling for trip find removal failure
+					console.log('could not delete trip');
+					res.status(500).end();
+				}
 				res.status(201).end();
 				return;
 			});
 		})
 	},
 
-	// Get the most recent finished trip of requested user
+	// Input: Request body with if of requested user
+	// Output: Most recent trip of user (by date embedded in _id)
 	getRecent: function(req, res){
 		var id = req.query.id;
-		//this is the hardcoded part... issues with mongo query
-		// {},{$sort: {'_id':-1}},
+		// Find past trip
 		PastTrip.find({}, function(err, trip){
-			if(err){
+			if(err){	// Error handling for no past trip found for user
 				console.log('Trip with user as participant not found');
 				res.status(500).end();
 				return;
