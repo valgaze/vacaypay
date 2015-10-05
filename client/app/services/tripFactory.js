@@ -72,7 +72,8 @@
         params: { id: currentUser }
       })
       .then(function(res) {
-        callback(res.data);
+        // Should return an array of only one trip, so we want to pull it out.
+        callback(res.data[0]);
       });
     }
 
