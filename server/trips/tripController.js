@@ -131,9 +131,10 @@ module.exports = {
 
 	// Get the most recent finished trip of requested user
 	getRecent: function(req, res){
-		var data = req.body;
-		var id = data.id;
-		PastTrip.find({participants: id},{},{sort: {'_id':-1}}, function(err, trip){
+		var id = req.query.id;
+		//this is the hardcoded part... issues with mongo query
+		// {},{$sort: {'_id':-1}},
+		PastTrip.find({}, function(err, trip){
 			if(err){
 				console.log('Trip with user as participant not found');
 				res.status(500).end();
