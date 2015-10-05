@@ -2,12 +2,13 @@
   'use strict';
 
   angular.module('app')
-  .controller('CreateExpenseController', function ($scope, $rootScope, $modalInstance, $state, $cacheFactory, Expenses) {
+  .controller('CreateExpenseController', function ($scope, $rootScope, $window, $modalInstance, $state, $cacheFactory, Expenses, Auth) {
     var cache = $cacheFactory.get('tripData');
 
     $scope.expense = {};
     var participants = cache.get('participants');
-    var creator = cache.get('creator')
+    var creatorId = $window.localStorage.getItem('userId');
+    var creatorUsername = $window.localStorage.getItem('username');
 
     // Partiicpants is mapped to format it in a way that the dropdown menu can understand.
     $scope.participants = participants.map(function(participant) {
@@ -15,7 +16,7 @@
     });
 
     // $scope.stakeholders is the model that the dropdown menu creates.
-    $scope.stakeholders = [{id: creator.id, label: creator.username}];
+    $scope.stakeholders = [{id: creatorId, label: creatorUsername}];
 
     // Configures the dropdown menu
     // http://dotansimha.github.io/angularjs-dropdown-multiselect/#/
@@ -33,7 +34,7 @@
     $scope.addExpense = function () {
       // If the stakeholders model is empty add the creator to the model
       if(!$scope.stakeholders.length) {
-        $scope.stakeholders = [{id: creator.id, label: creator.username}];
+        $scope.stakeholders = [{id: creatorId, label: creatorUsername}];
       }
 
       // Return the data back to the server in the correct format

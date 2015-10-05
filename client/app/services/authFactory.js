@@ -4,6 +4,7 @@
   angular.module('app')
   .factory('Auth', function ($http, $state, $window) {
     var currentUserId;
+    var currentUserName;
 
     var services = {
       signin: signin,
@@ -16,7 +17,7 @@
     return services;
 
     function signin (user, callback) {
-      console.log('signed in!');
+      $window.localStorage.setItem('username', user.username);
       $http.post('/users/signin', user)
       .then(function (res) {
         currentUserId = res.data.user;
@@ -29,7 +30,7 @@
     }
 
     function signup (user, callback) {
-      console.log('just signed up!');
+      $window.localStorage.setItem('username', user.username);
       $http.post('/users/signup', user)
       .then(function (res) {
         console.log('Signed up!');
