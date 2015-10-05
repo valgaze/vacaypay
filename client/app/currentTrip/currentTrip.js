@@ -28,8 +28,8 @@
         // reference is used to keep track of + and - as we iterate through expenses
         // result is the summary for users (who should pay how much)
         for (var i = 0; i < $scope.participants.length; i++) {
-          reference[$scope.participants[i]['id']] = 0;
-          result[$scope.participants[i]['id']] = {};
+          reference[$scope.participants[i]['id']+ ',' + $scope.participants[i]['username']] = 0;
+          result[$scope.participants[i]['id']+ ',' + $scope.participants[i]['username']] = {};
         }
 
         // Loop through all expense
@@ -38,10 +38,10 @@
           var stakeholders = $scope.tripExpense[k].stakeholders;
           var amount = $scope.tripExpense[k].amount;
           // Add + for how much payer should receive
-          reference[payer.id] += amount;
+          reference[payer.id + ',' + payer.username] += amount;
           // Split the payment among stakeholders as -
           for (var l = 0; l < stakeholders.length; l++) {
-            reference[stakeholders[l].id] -= amount/stakeholders.length;
+            reference[stakeholders[l].id + ',' + stakeholders[l].username] -= amount/stakeholders.length;
           }
         }
 
