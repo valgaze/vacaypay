@@ -182,14 +182,17 @@ module.exports = {
 	getRecent: function(req, res){
 		var id = req.query.id;
 		// Find past trip
-		PastTrip.find({}, function(err, trip){
-			if(err){	// Error handling for no past trip found for user
-				console.log('Trip with user as participant not found');
-				res.status(500).end();
+		PastTrip.find({participants:id})
+			.sort('-_id')
+			.limit(10)
+			.exec(function(err, data){
+				if(data.length === 0){	// Error handling for no past trip found for user
+					console.log('Trip with user as participant not found');
+					res.status(500).end();
+					return;
+				}
+				res.status(200).send(data[0]).end();
 				return;
-			}
-			res.status(200).send(trip).end();
-			return;
-		})
+			});
 	}
 }
