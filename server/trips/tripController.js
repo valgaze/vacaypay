@@ -11,6 +11,7 @@ module.exports = {
 		User.findById(id, function(err, user){
 			if(err){	// Error handling for user not found
 				console.log('User not found');
+				console.log(err)
 				res.status(404).end();
 			}
 			// Find trip by id contained by current trip of found user
@@ -19,7 +20,11 @@ module.exports = {
 				// that the trip ended so we set it to null for user and return nothing.
 				if(currenttrip === null){
 					user.currentTrip = null;
-					user.save(err, function(){
+					user.save(function(err, userdata){
+						if(err){
+							console.log('error saving user');
+							console.log(err);
+						}
 						res.status(200).send(currenttrip).end();
 						return;
 					})
