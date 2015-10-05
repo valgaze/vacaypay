@@ -9,7 +9,7 @@
     var participants = cache.get('participants');
     var creator = cache.get('creator')
 
-    // Partiicpants is mapped to format it in a way that the dropdown menu can understand.
+    // Participants is mapped to format it in a way that the dropdown menu can understand.
     $scope.participants = participants.map(function(participant) {
       return { id: participant.id, label: participant.username };
     });
@@ -32,6 +32,7 @@
 
     $scope.addExpense = function () {
       // If the stakeholders model is empty add the creator to the model
+      console.log('does it add expense?');
       if(!$scope.stakeholders.length) {
         $scope.stakeholders = [{id: creator.id, label: creator.username}];
       }
