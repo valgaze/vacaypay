@@ -2,8 +2,12 @@
   'use strict';
 
   angular.module('app')
-  .controller('CurrentTripController', function ($scope, $location, $state, Trip) {
+  .controller('CurrentTripController', function ($scope, $location, $state, Trip, Auth) {
     $scope.currentTrip = {};
+
+    $scope.logout = function() {
+      Auth.signout();
+    };
 
     $scope.hasTrip = function () {
       Trip.hasTrip( function (data) {
@@ -61,12 +65,12 @@
         while(matrix[0][1] < -0.000000001){
           // Most 'broke' person tries to pay out to the richest person as much as possible.
           if(matrix[matrix.length - 1][1] > -1*matrix[0][1]){
-            result[matrix[0][0]][matrix[matrix.length-1][0]] = -1*matrix[0][1]
+            result[matrix[0][0]][matrix[matrix.length-1][0]] = -1*matrix[0][1];
             matrix[matrix.length - 1][1] += matrix[0][1];
-            matrix[0][1] = 0
+            matrix[0][1] = 0;
           } else {
-            result[matrix[0][0]][matrix[matrix.length-1][0]] = matrix[matrix.length - 1][1]
-            matrix[0][1] += matrix[matrix.length - 1][1]
+            result[matrix[0][0]][matrix[matrix.length-1][0]] = matrix[matrix.length - 1][1];
+            matrix[0][1] += matrix[matrix.length - 1][1];
             matrix[matrix.length - 1][1] = 0;
           }
 
@@ -92,7 +96,7 @@
         Trip.endTrip($scope.tripData, function () {
           $state.transitionTo('fallback');
         });
-      })
+      });
     };
   });
 })();

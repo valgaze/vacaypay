@@ -4,38 +4,33 @@
     <meta charset="utf-8" />
     <title>VacayPay</title>
     <link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+    <link rel="stylesheet" type="text/css" href="dist/styles.min.css" />
   </head> 
   <body>
     <div ui-view></div>
 
-    <script src="lib/jquery/dist/jquery.min.js"></script>
-    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="lib/angular/angular.js"></script>
-    <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="lib/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="lib/lodash/dist/lodash.min.js"></script>
-    <script src="lib/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>
+    <script src="dist/dependencies.min.js"></script>
 
-    <!-- Initial application module -->
+<!--     // <script src="lib/jquery/dist/jquery.min.js"></script>
+    // <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    // <script src="lib/angular/angular.js"></script>
+    // <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    // <script src="lib/angular-bootstrap/ui-bootstrap.min.js"></script>
+    // <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    // <script src="lib/lodash/dist/lodash.min.js"></script>
+    // <script src="lib/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script> -->
+
+<!--     // <script src="dist/client.min.js"></script> -->
+
     <script src="app/app.js"></script>
-    <!-- Authorization -->
     <script src="app/auth/auth.js"></script>
-    <!-- Fallback/Home -->
     <script src="app/fallback/fallback.js"></script>
-    <!-- Create Trip -->
     <script src="app/createTrip/createTrip.js"></script>
-    <!-- Current Trip -->
     <script src="app/currentTrip/currentTrip.js"></script>
     <script src="app/expense/expense.js"></script>
     <script src="app/createExpense/createExpense.js"></script>
-    <!--  Past Trips -->
     <script src="app/pastTrip/pastTrip.js"></script>
-
-    <!-- Routing for HTML pages -->
     <script src="app/route-config.js"></script>
-    <!-- Factory Files -->
     <script src="app/services/authFactory.js"></script>
     <script src="app/services/expenseFactory.js"></script>
     <script src="app/services/tripFactory.js"></script>
