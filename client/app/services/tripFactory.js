@@ -5,6 +5,7 @@
   function ($http, $cacheFactory, $window, Auth) {
 
     var currentUser = $window.localStorage.getItem('userId');
+    var username = $window.localStorage.getItem('username');
     var cache = $cacheFactory('tripData');
     // var currentTripData;
 
@@ -66,7 +67,10 @@
 
     function getRecentTrip(callback) {
       $http.get('/trips/recent', {
-        params: { id: currentUser }
+        params: {
+          id: currentUser,
+          username: username
+        }
       })
       .then(function(res) {
         // Should return an array of only one trip, so we want to pull it out.
