@@ -82,6 +82,10 @@ module.exports = function(grunt) {
       'cssmin'
     ]);
 
+    grunt.registerTask('heroku', [
+      'build'
+    ]);
+
     grunt.registerTask('default', [
       'build',
       'nodemon'
