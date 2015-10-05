@@ -157,7 +157,6 @@ module.exports = {
 	endTrip: function(req, res){
 		var id = req.body._id;
 		var data = req.body;
-		console.log(data);
 		delete data._id;
 		// Create past trip according to given trip info
 		PastTrip.create(data, function(err, past){
