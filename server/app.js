@@ -1,6 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var favicon = require('serve-favicon');
+var 
 
 var app = express();
 
@@ -22,8 +23,9 @@ require('./config/middleware.js')(app, express);
 // serve favicon
 app.use(favicon(__dirname + '/../client/assets/favicon.ico'));
 
-var httpsServer = https.createServer(credentials, app);
-httpsServer.listen(app.get('port'));
+//Did not get Heroku working with https
+// var httpsServer = https.createServer(credentials, app);
+app.listen(app.get('port'));
 console.log('Listening to port ' + app.get('port'));
 
 module.exports = app;
