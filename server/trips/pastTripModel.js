@@ -26,8 +26,7 @@ var PastTripSchema = new Schema({
 	},
 	code: {
 		type: String,
-		required: true,
-		unique: true
+		required: true
 	},
 	expenses: [
 		{

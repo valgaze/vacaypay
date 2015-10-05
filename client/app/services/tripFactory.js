@@ -69,7 +69,7 @@
       })
       .then(function(res) {
         // Should return an array of only one trip, so we want to pull it out.
-        callback(res.data[0]);
+        callback(res.data);
       });
     }
 
