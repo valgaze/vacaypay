@@ -10,7 +10,7 @@
     var creatorId = $window.localStorage.getItem('userId');
     var creatorUsername = $window.localStorage.getItem('username');
 
-    // Partiicpants is mapped to format it in a way that the dropdown menu can understand.
+    // Participants is mapped to format it in a way that the dropdown menu can understand.
     $scope.participants = participants.map(function(participant) {
       return { id: participant.id, label: participant.username };
     });
