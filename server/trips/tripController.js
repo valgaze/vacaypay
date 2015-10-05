@@ -215,7 +215,7 @@ module.exports = {
 	getRecent: function(req, res){
 		var id = req.query.id;
 		// Find past trip
-		PastTrip.find({},{participants:id})
+		PastTrip.find({participants:{"$in":  }})
 			.sort('-_id')
 			.limit(10)
 			.exec(function(err, data){
