@@ -59,9 +59,9 @@
         </div>
       </tab>
 
-      <tab heading="Settle Out">
+      <tab heading="Settle Out" selected>
         <ul>
-          <li ng-repeat="transaction in recentTrip.summary"><p>{{ transaction.payer.username }} owes {{ transaction.payee.username }} {{ transaction.amount | currency }}.</p></li>
+          <li ng-repeat="transaction in recentTrip.summary"><p>{{ transaction.username }} owes {{ transaction.payee.username }} {{ transaction.payee.amount | currency }}.</p></li>
         </ul>
       </tab>
 
