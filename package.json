@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "json-server --watch db.json --static ./client",
-    "test": "./node_modules/.bin/mocha --reporter nyan test/server/ServerSpec.js"
+    "test": "./node_modules/.bin/mocha --reporter nyan test/server/ServerSpec.js",
+    "postinstall": "bower install"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
