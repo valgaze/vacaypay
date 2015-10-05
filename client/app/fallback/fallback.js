@@ -9,6 +9,10 @@
     $scope.totalExpenses;
     $scope.hasRecentTrip = false;
 
+    $scope.logout = function() {
+      Auth.signout();
+    };
+
     $scope.open = function() {
       var modalInstance = $modal.open({
         animation: true,
