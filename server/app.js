@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 
 var app = express();
 
+app.set('port', (process.env.PORT || 8443));
+
 var fs = require('fs');
 var https = require('https');
 var privateKey = fs.readFileSync(__dirname + '/server.key');
@@ -11,7 +13,8 @@ var certificate = fs.readFileSync(__dirname + '/server.cert');
 
 var credentials = {key: privateKey, cert: certificate};
 
-mongoose.connect('mongodb://localhost/test');
+var db = process.env.MONGOLAB_URI || 'mongodb://localhost/vcp';
+mongoose.connect(db);
 
 // routing handled in middleware
 require('./config/middleware.js')(app, express);
@@ -20,7 +23,7 @@ require('./config/middleware.js')(app, express);
 app.use(favicon(__dirname + '/../client/assets/favicon.ico'));
 
 var httpsServer = https.createServer(credentials, app);
-httpsServer.listen(8443);
-console.log('Listening to port 8443...');
+httpsServer.listen(app.get('port'));
+console.log('Listening to port ' + app.get('port'));
 
 module.exports = app;
