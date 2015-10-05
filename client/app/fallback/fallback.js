@@ -7,6 +7,7 @@
     $scope.tripCode = "";
     $scope.recentTrip;
     $scope.totalExpenses;
+    $scope.hasRecentTrip = false;
 
     $scope.open = function() {
       var modalInstance = $modal.open({
@@ -33,8 +34,11 @@
 
     $scope.getRecentTrip = function () {
       Trip.getRecentTrip(function (recentTrip) {
-        $scope.recentTrip = recentTrip;
-        totalExpenses();
+        if (recentTrip) {
+          $scope.recentTrip = recentTrip;
+          totalExpenses();
+          $scope.hasRecentTrip = true;
+        }
       });
     }
 
