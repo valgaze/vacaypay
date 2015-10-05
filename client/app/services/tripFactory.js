@@ -12,8 +12,9 @@
       cacheTrip: cacheTrip,
       joinTrip: joinTrip,
       getRecentTrip: getRecentTrip,
-      // currentTrip: currentTrip,
-      hasTrip: hasTrip
+      hasTrip: hasTrip,
+      endTrip: endTrip
+
     };
 
     return services;
@@ -52,16 +53,11 @@
       return cache;
     }
 
-    // function currentTrip() {
-    //   return currentTripData;
-    // }
-
     function hasTrip(callback) {
       $http.get('/trips', {
         params: { id: currentUser }
       })
       .then( function (res) {
-        // currentTripData = res.data[0];
         cacheTrip(res.data);
         callback(res.data);
       });
@@ -74,6 +70,13 @@
       .then(function(res) {
         // Should return an array of only one trip, so we want to pull it out.
         callback(res.data[0]);
+      });
+    }
+
+    function endTrip(resultObj, callback) {
+      $http.post('/trips/end', resultObj)
+      .then(function (res) {
+        callback();
       });
     }
 
