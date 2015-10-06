@@ -214,11 +214,14 @@ module.exports = {
 	// Output: Most recent trip of user (by date embedded in _id)
 	getRecent: function(req, res){
 		var id = req.query.id;
+		var username = req.query.username;
 		// Find past trip
-		PastTrip.find({participants:{"$in":  }})
+		
+		PastTrip.find({participants:{$elemMatch: { id: id, username: username }}} )
 			.sort('-_id')
 			.limit(10)
 			.exec(function(err, data){
+				console.log(data)
 				if(data.length === 0){	// Error handling for no past trip found for user
 					console.log('Trip with user as participant not found');
 					res.status(404).end();

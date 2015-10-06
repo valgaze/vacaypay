@@ -2,13 +2,14 @@
   'use strict';
 
   angular.module('app')
-  .controller('FallbackController', ['$scope', '$http', '$modal', '$state', 'Trip', 'Auth',
-  function ($scope, $http, $modal, $state, Trip, Auth) {
+  .controller('FallbackController', ['$scope', '$http', '$modal', '$state', '$window', 'Trip', 'Auth',
+  function ($scope, $http, $modal, $state, $window, Trip, Auth) {
 
     $scope.tripCode = '';
     $scope.recentTrip;
     $scope.totalExpenses;
     $scope.hasRecentTrip = false;
+    $scope.username = $window.localStorage.getItem('username');
 
     $scope.logout = function() {
       Auth.signout();
