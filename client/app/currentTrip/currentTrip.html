@@ -16,6 +16,9 @@
 <div class="container-fluid">
   <div class="pull-left">
     <h1 class="tripName">{{ data.name }}</h1>
+    <div>
+      <span class="creator"> Trip Code: <strong>{{data.code}}</strong></span>
+    </div>
     <span class="creator">  started by <strong>{{ data.creator.username }}</strong></span>
     <!-- <div class="participants" ng-repeat="friends in data.participants">{{ friends.name }}</div> -->
   </div>
