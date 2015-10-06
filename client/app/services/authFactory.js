@@ -51,12 +51,13 @@
       return currentUserId;
     }
 
-    function signout () {
+    function signout ($rootScope) {
       $window.localStorage.removeItem('com.vacaypay');
       $window.localStorage.removeItem('userId');
       $window.localStorage.removeItem('username');
       currentUserId = null;
       currentUserName = null;
+      $window.location.reload();
       $state.transitionTo('signin');
     }
 
