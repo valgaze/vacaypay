@@ -228,7 +228,7 @@ module.exports = {
 					return;
 				}
 				PastTrip.findById(data[0]._id, function (err, data) {
-					if(data) {
+					if(data === null) {
 						console.log('Trip not found after finding user');
 						console.log(err);
 						res.status(404).end();
