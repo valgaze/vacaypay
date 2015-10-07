@@ -96,7 +96,7 @@ module.exports = {
 			if(trip === null){	// Error handling for non-existent trip
 				console.log('Such code does not exist');
 				console.log(err);
-				res.status(404).end('Such code does not exist');
+				res.send({problem:"That code is not associated with a trip."});
 				return;
 			}
 			// Find user by given id

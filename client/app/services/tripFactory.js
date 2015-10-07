@@ -41,7 +41,7 @@
       })
       .then(function(res) {
         cacheTrip(res.data);
-        callback();
+        callback(res.data);
       });
     }
 

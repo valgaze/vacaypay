@@ -29,6 +29,12 @@
       <button type="submit" class="btn">Join Trip</button>
     </form>
   </div>
+  
+  <div ng-show="error" class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    Not a valid trip code =(
+  </div>
 
   <hr>
 
