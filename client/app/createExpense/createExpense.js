@@ -51,5 +51,6 @@
     $scope.cancel = function () {
       $modalInstance.dismiss('cancel');
     };
+    $scope.expense.date = new Date();
   }]);
 })();
