@@ -24,8 +24,13 @@
     };
 
     $scope.joinTrip = function() {
-      Trip.joinTrip($scope.tripCode, function() {
-        $state.transitionTo('currentTrip.expense');
+      Trip.joinTrip($scope.tripCode, function(data) {
+        if (!data.problem){
+          $state.transitionTo('currentTrip.expense');          
+        }else{
+          $scope.error = true;
+        }
+
       });
     };
 
