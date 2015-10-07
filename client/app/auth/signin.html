@@ -16,7 +16,6 @@
 <div id="signin">
   <h2>Sign In</h2>
   <form name="signinForm" class="authForm" ng-submit="signin()">
-    <div name='signinError' class='error' ng-show='signinFail'>Error signing in</div>
     <div class="row">
       <input class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4" type="text" name="username" ng-model="user.username" placeholder="Username" required><br>
     </div>
@@ -26,6 +25,7 @@
     <div class="row">
       <button class="col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-5" type="submit">Sign In</button>
     </div>
+    <div name='signinError' class='error' ng-show='signinFail'>Error signing in. Please try again.</div>
   </form>
 
   <div class="message" ng-show="signinForm.username.$error.text">
