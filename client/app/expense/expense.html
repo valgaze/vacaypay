@@ -2,7 +2,7 @@
 	<button type="button" class="btn expenseBtn" ng-click="open()">Add An Expense</button>
 	<div ng-controller="ExpenseAccordionController">
 	  <accordion close-others="oneAtATime">
-	    <accordion-group heading="{{ expense.payer.username }} paid for {{expense.name}}" ng-repeat="expense in data.expenses">
+	    <accordion-group heading="{{ expense.payer.username }} paid for {{expense.name}} {{expense.date !== undefined ? 'on '+ (expense.date|date) : ''}}" ng-repeat="expense in data.expenses">
 	      <p>${{ expense.amount.toFixed(2) }} will be split among:</p>
 	      <ul>
 	      	<li ng-repeat="friend in expense.stakeholders">{{ friend.username }}</li>
