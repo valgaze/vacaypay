@@ -21,6 +21,7 @@
       $http.post('/trips/expense', {
         id: $window.localStorage.getItem('userId'),
         amount: expense.amount,
+        date: expense.date,
         name: expense.name,
         stakeholders: stakeholders
       }).then(function (res) {
