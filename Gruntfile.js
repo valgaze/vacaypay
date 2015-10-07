@@ -65,7 +65,16 @@ module.exports = function(grunt) {
 
       nodemon: {
         dev: {
-          script: 'server/app.js'
+          script: 'server/app.js',
+          options:{
+            callback: function (nodemon) {
+                   nodemon.on('restart', function (event) {
+                     console.log("This logs, but build doesn't run");
+                     grunt.task.run(['build']);
+                     
+                   });
+                 }
+          }
         }
       }
     });
