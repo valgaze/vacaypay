@@ -17,10 +17,15 @@
   <div class="pull-left">
     <h1 class="tripName">{{ data.name }}</h1>
     <div>
-      <span class="creator"> Trip Code: <strong>{{data.code}}</strong></span>
+      <span class="creator">Trip Code:</span> {{data.code}}
     </div>
-    <span class="creator">  started by <strong>{{ data.creator.username }}</strong></span>
-    <!-- <div class="participants" ng-repeat="friends in data.participants">{{ friends.name }}</div> -->
+    <div>
+      <span class="creator">Started by</span> {{ data.creator.username }}
+    </div>
+    <div>
+      <span ng-hide="fellowTravelers.length === 0" class="creator">Traveling with </span>
+        <span class="participants" ng-repeat="friend in fellowTravelers">{{ friend }}{{ $last ? "" : ","}} </span>      
+    </div>
   </div>
 
   <button ng-click="calculateExpense()" class="btn pull-right endTrip">End Trip</button>

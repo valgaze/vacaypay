@@ -13,6 +13,15 @@
     $scope.hasTrip = function () {
       Trip.hasTrip( function (data) {
         $scope.data = data;
+
+        if (data){          
+          $scope.fellowTravelers = data.participants.filter(function(nameObj){
+            return nameObj.id !== data.creator.id;
+          }).map(function(nameObj){
+            return nameObj.username;
+          });
+        }
+
         if (!$scope.data.name) {
           $state.transitionTo('fallback');
         }
