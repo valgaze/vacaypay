@@ -22,6 +22,7 @@
         id: $window.localStorage.getItem('userId'),
         amount: expense.amount,
         date: expense.date,
+        location: expense.location,
         name: expense.name,
         stakeholders: stakeholders
       }).then(function (res) {
