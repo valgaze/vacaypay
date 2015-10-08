@@ -12,11 +12,13 @@
     $scope.signin = function () {
 
       Auth.signin($scope.user, function (token) {
+          $scope.signinFail = false;
           $window.localStorage.setItem('com.vacaypay', token);
           $state.transitionTo('currentTrip.expense');
           $scope.signinForm.$setPristine();
+      }, function(res){
+        $scope.signinFail = true;
       });
-      $scope.signinFail = !(Auth.isAuth());
     };
     //Sign up function and store token into local storage
     //then change state to currentTrip.html
