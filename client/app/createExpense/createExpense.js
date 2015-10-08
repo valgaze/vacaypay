@@ -34,7 +34,7 @@
 
     $scope.addExpense = function () {
       // If the stakeholders model is empty add the creator to the model
-      $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + $scope.expense.address)
+      $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + $scope.expense.location)
         .then(function(result){
 
           $scope.expense.location = result.data.results[0].geometry.location;
