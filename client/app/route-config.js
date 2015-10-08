@@ -58,10 +58,13 @@
     var attach = {
       request: function (object) {
         var jwt = $window.localStorage.getItem('com.vacaypay');
-        if (jwt) {
-          object.headers['x-access-token'] = jwt;
+        
+        if (!/^https?:\/\/maps.googleapis.com/.test(object.url)){
+          if (jwt) {
+            object.headers['x-access-token'] = jwt;
+          }
+          object.headers['Allow-Control-Allow-Origin'] = '*';
         }
-        object.headers['Allow-Control-Allow-Origin'] = '*';
         return object;
       }
     };

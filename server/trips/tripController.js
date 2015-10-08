@@ -141,6 +141,7 @@ module.exports = {
 		var id = data.id;
 		var name = data.name;
 		var date = data.date;
+		var location = data.location;
 		var amount = data.amount;
 		var stakeholders = data.stakeholders;
 		// Find user by given id
@@ -164,6 +165,7 @@ module.exports = {
 					name: name,
 					amount: amount,
 					date: date,
+					location: location,
 					payer: {id: user._id, username: user.username},
 					stakeholders: stakeholders
 				};

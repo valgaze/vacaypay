@@ -34,6 +34,7 @@ var TripSchema = new Schema({
 			name: String,
 			amount: Number,
 			date: Date,
+			location: Schema.Types.Mixed,
 			payer: {
 				id:{
 					type: Schema.Types.ObjectId,
