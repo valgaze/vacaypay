@@ -16,16 +16,16 @@
 
     return services;
 
-    function signin (user, callback) {
+    function signin (user, successCb, errorCb) {
       $window.localStorage.setItem('username', user.username);
       $http.post('/users/signin', user)
       .then(function (res) {
         currentUserId = res.data.user;
         console.log(currentUserId);
         $window.localStorage.setItem('userId', currentUserId);
-        callback(res.data.token);
+        successCb(res.data.token);
       }, function (res) {
-        console.log('Sign in error');
+        errorCb(res);
       });
     }
 
