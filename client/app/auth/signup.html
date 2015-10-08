@@ -26,6 +26,7 @@
     <div class="row">
       <button class="col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-5" type="submit">Sign Up</button>
     </div>
+    <div name='signupError' class='alert alert-danger text-center' ng-show='signupFail'>Sorry, that username is already taken.</div>
   </form>
 
   <div class="message" ng-show="signupForm.username.$error.text">
