@@ -7,7 +7,7 @@
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
   }])
   .factory('Currency', ['$http', function ($http) {
-    var urlEndpoint = 'http://aqueous-temple-6169.herokuapp.com/api/v1/rate/eur/usd';
+    
 
     var services = {
       getRate: getRate
@@ -16,6 +16,10 @@
     return services;
 
     function getRate(from, successCb, errorCb) {
+      if (!from){
+        from = 'usd';
+      }
+      var urlEndpoint = 'http://aqueous-temple-6169.herokuapp.com/api/v1/rate/' + from + '/usd';
         $http({
             url: urlEndpoint,
             method: "GET",
