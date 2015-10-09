@@ -70,7 +70,6 @@
       };
 
       var fromCurrency = $scope.currencyData[$scope.currencyModel.id - 1].code || 'usd';
-      alert("Symbol:" + fromCurrency);
       Currency.getRate(fromCurrency, onSuccess, onError);
     };
 
