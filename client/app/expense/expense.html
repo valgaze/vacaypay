@@ -8,7 +8,7 @@
 			<span>No expenses added yet.</span>
 		</div>
 	  <accordion close-others="oneAtATime">
-	    <accordion-group heading="{{ expense.payer.username }} paid for {{expense.name}} {{expense.location}} {{expense.date !== undefined ? 'on '+ (expense.date|date) : ''}}" ng-repeat="expense in data.expenses">
+	    <accordion-group heading="{{ expense.payer.username }} paid for {{expense.name}} {{expense.date !== undefined ? 'on '+ (expense.date|date) : ''}}" ng-repeat="expense in data.expenses">
 	      <p>${{ expense.amount.toFixed(2) }} will be split among:</p>
 	      <ul>
 	      	<li ng-repeat="friend in expense.stakeholders">{{ friend.username }}</li>
