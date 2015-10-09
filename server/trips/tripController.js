@@ -144,6 +144,9 @@ module.exports = {
 		var location = data.location;
 		var amount = data.amount;
 		var stakeholders = data.stakeholders;
+		var locationString = data.locationString;
+		var expenseString = data.expenseString;
+
 		// Find user by given id
 		User.findById(id, function(err, user){
 			if(user === null){ 	// Error handling for non-existent user
@@ -167,7 +170,9 @@ module.exports = {
 					date: date,
 					location: location,
 					payer: {id: user._id, username: user.username},
-					stakeholders: stakeholders
+					stakeholders: stakeholders,
+					locationString: locationString,
+					expenseString:expenseString
 				};
 				// Update expense in trip
 				trip.expenses.push(newExpense);
