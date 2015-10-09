@@ -2,8 +2,8 @@
   'use strict';
 
   angular.module('app')
-  .controller('CreateExpenseController', ['$scope', '$rootScope', '$window', '$modalInstance', '$state', '$cacheFactory', '$http', 'Expenses', 'Auth',
-  function ($scope, $rootScope, $window, $modalInstance, $state, $cacheFactory, $http, Expenses, Auth) {
+  .controller('CreateExpenseController', ['$scope', '$rootScope', '$window', '$modalInstance', '$state', '$cacheFactory', '$http', 'Expenses', 'Auth', 'Currency',
+  function ($scope, $rootScope, $window, $modalInstance, $state, $cacheFactory, $http, Expenses, Auth, Currency) {
     var cache = $cacheFactory.get('tripData');
 
     $scope.expense = {};
@@ -59,6 +59,35 @@
       $modalInstance.dismiss('cancel');
     };
     $scope.expense.date = new Date();
+
+    /** Currnency Convert Helper **/
+
+    $scope.currencyModel = [];
+    $scope.currencyData = [{id: 1, label: 'Euro'}, {id: 2, label: 'Thai Baht'}, {id: 3, label: 'Vietnamese Dong'}];
+    $scope.currDropdownSettings = {
+      showCheckAll: false,
+      showUncheckAll: false,
+      selectionLimit: 1,
+      closeOnSelect: true,
+      smartButtonMaxItems: 1
+    };
+
+    $scope.convert = function () {
+
+      $scope.expense.amount;
+    };
+
+    $scope.testFunc = function(){
+      console.log('converting!');
+      alert('fire')
+      Currency.getRate('rates', function(rate){
+        alert(rate);
+      }, function(err){
+        alert('fire')
+        console.log(err);
+      });
+    };
+
 
     // $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + $scope.expense.address)
     //     .then(function(result){console.log(result.data.results[0].geometry.location)})
