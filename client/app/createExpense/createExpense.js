@@ -79,11 +79,9 @@
 
     $scope.testFunc = function(){
       console.log('converting!');
-      alert('fire')
       Currency.getRate('rates', function(rate){
-        alert(rate);
+        console.log("From createExpense.js:", rate);
       }, function(err){
-        alert('fire')
         console.log(err);
       });
     };

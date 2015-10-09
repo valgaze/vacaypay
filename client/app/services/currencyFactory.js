@@ -15,26 +15,20 @@
 
     return services;
 
-
     function getRate(from, successCb, errorCb) {
-
-      $http({
-              url:  urlEndpoint,
-              method: "GET",
-              headers: {
-                          'Content-Type': 'application/json; charset=utf-8'
-              }
-          }).then(function (res) {
-        // var rate = res.data.from;
-        var rateData = res.data;
-        console.log(rateData);
-        successCb(rateData);
-      }, function (res) {
-        console.log('Error retrieving exchange rates');
-        errorCb(res);
-      });
-    // function convert(){};
-
+        $http({
+            url: urlEndpoint,
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        }).then(function(res) {
+            var rateData = res.data;
+            successCb(rateData);
+        }, function(res) {
+            console.log('Error retrieving exchange rates');
+            errorCb(res);
+        });
     }
   }]);
 })();
