@@ -34,25 +34,40 @@
 
     $scope.addExpense = function () {
       // If the stakeholders model is empty add the creator to the model
-      $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + $scope.expense.location)
-        .then(function(result){
 
-          $scope.expense.location = result.data.results[0].geometry.location;
+      var onSuccess = function (rate){
+        $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + $scope.expense.location)
+          .then(function(result){
 
-          if(!$scope.stakeholders.length) {
-            $scope.stakeholders = [{id: creatorId, label: creatorUsername}];
-          }
+            if (!result.data.results[0]){
+              //#TODO: Improve this error handling
+              alert('Invalid location');
+              return;              
+            }
+            $scope.expense.location = result.data.results[0].geometry.location;
 
-          // Return the data back to the server in the correct format
-          $scope.stakeholders = $scope.stakeholders.map(function(stakeholder) {
-            return { id: stakeholder.id, username: stakeholder.label };
+            if(!$scope.stakeholders.length) {
+              $scope.stakeholders = [{id: creatorId, label: creatorUsername}];
+            }
+
+            // Return the data back to the server in the correct format
+            $scope.stakeholders = $scope.stakeholders.map(function(stakeholder) {
+              return { id: stakeholder.id, username: stakeholder.label };
+            });
+            Expenses.addExpense($scope.expense, $scope.stakeholders, function (tripData) {
+              console.log('expense added');
+              $modalInstance.close(tripData.expenses);
+            });
+            
           });
-          Expenses.addExpense($scope.expense, $scope.stakeholders, function (tripData) {
-            console.log('expense added');
-            $modalInstance.close(tripData.expenses);
-          });
-          
-        });
+      };
+
+      var onError = function(err){
+        //#TODO: Improve this error handling
+        alert('There was a catastrophic error:' + err);
+        return;  
+      }
+      Currency.getRate('rates', onSuccess, onError);
     };
 
     $scope.cancel = function () {
@@ -63,7 +78,8 @@
     /** Currnency Convert Helper **/
 
     $scope.currencyModel = [];
-    $scope.currencyData = [{id: 1, label: 'Euro'}, {id: 2, label: 'Thai Baht'}, {id: 3, label: 'Vietnamese Dong'}];
+    $scope.currencyData = [{id: 1, symbol:"EUR", label: 'Euro'}, {id: 2, symbol: "JPY", label: 'Japanese Yen'}, {id: 3, symbol:"CAD", label: 'Canadan Syrup'}];
+
     $scope.currDropdownSettings = {
       showCheckAll: false,
       showUncheckAll: false,
@@ -72,9 +88,12 @@
       smartButtonMaxItems: 1
     };
 
-    $scope.convert = function () {
-
+    $scope.convert = function (rate) {
+      var resultInDollars = 0;
       $scope.expense.amount;
+
+      return 
+
     };
 
     $scope.testFunc = function(){
