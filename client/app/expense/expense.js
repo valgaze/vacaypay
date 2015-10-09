@@ -14,10 +14,51 @@
         Trip.cacheTrip(data);
         var cache = $cacheFactory.get('tripData');
         $scope.data.expenses = cache.get('expenses');
+        $scope.findCenter();
+        if ($scope.data.center && $scope.map !== undefined){
+          console.log('recentering map');
+          $scope.map.setCenter($scope.data.center);
+        }
       });
     };
+
+    $scope.findCenter = function() {
+      var center = {};
+      center = $scope.data.expenses.reduce(function(previousValue,currentValue){
+        var result = {
+          location: {
+            lat: previousValue.location.lat+currentValue.location.lat,
+            lng: previousValue.location.lng+currentValue.location.lng
+          }
+        };
+        console.log(result);
+        return result;
+      });
+      center.location.lat = center.location.lat/$scope.data.expenses.length;
+      center.location.lng = center.location.lng/$scope.data.expenses.length;
+      $scope.data.center = center.location;
+    };
+
     
-    $scope.getExpenses();
+    //$scope.findCenter();
+    //console.log($scope.data.center);
+
+    $scope.$on('mapInitialized', function(evt, evtMap) {
+        $scope.map = evtMap;
+        alert("map initialized");
+        $scope.getExpenses();
+      });
+
+    // $scope.$watch("data.center", function() {
+    //   alert('data.center was called');
+    //   console.log("hey there" + $scope.map);
+    //   if ($scope.data.center && $scope.map !== undefined){
+    //     $scope.map.setCenter($scope.data.center.location.lat,$scope.data.center.location.lng);
+    //   }
+    // });
+
+
+    
 
     $scope.open = function() {
       var modalInstance = $modal.open({
@@ -28,6 +69,10 @@
 
       modalInstance.result.then(function(expenses) {
         $scope.data.expenses = expenses;
+        if ($scope.data.center && $scope.map !== undefined){
+          console.log('recentering map');
+          $scope.map.setCenter($scope.data.center);
+        }
       });
     };
   }])

@@ -1,11 +1,14 @@
 <div class="expense-list">
 	<button type="button" class="btn expenseBtn" ng-click="open()">Add An Expense</button>
+	<map ng-controller="MapController" class="map" center="{{data.center.lat}}, {{data.center.lng}}" zoom="4">
+		<marker position="{{expense.location.lat}},{{expense.location.lng}}" title="Hello World!" ng-repeat="expense in data.expenses"></marker>
+	</map>
 	<div ng-controller="ExpenseAccordionController">
 		<div class="alert alert-info text-center" ng-hide="data.expenses.length">
 			<span>No expenses added yet.</span>
 		</div>
 	  <accordion close-others="oneAtATime">
-	    <accordion-group heading="{{ expense.payer.username }} paid for {{expense.name}} {{expense.date !== undefined ? 'on '+ (expense.date|date) : ''}}" ng-repeat="expense in data.expenses">
+	    <accordion-group heading="{{ expense.payer.username }} paid for {{expense.name}} {{expense.location}} {{expense.date !== undefined ? 'on '+ (expense.date|date) : ''}}" ng-repeat="expense in data.expenses">
 	      <p>${{ expense.amount.toFixed(2) }} will be split among:</p>
 	      <ul>
 	      	<li ng-repeat="friend in expense.stakeholders">{{ friend.username }}</li>
