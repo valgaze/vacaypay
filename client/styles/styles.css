@@ -85,6 +85,11 @@ h1 {
   border-radius: 0;
 }
 
+.map {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 800px;
+}
 /*  NAV BAR */
 
 #menu.navbar-default .navbar-brand {
