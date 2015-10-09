@@ -9,7 +9,7 @@
 		</div>
 	  <accordion close-others="oneAtATime">
 	    <accordion-group heading="{{ expense.payer.username }} paid for {{expense.name}} {{expense.date !== undefined ? 'on '+ (expense.date|date) : ''}} at {{ expense.locationString }}" ng-repeat="expense in data.expenses">
-	    Full: {{expense}}
+	    
 
 	      <p>{{expense.expenseString}} (${{ expense.amount.toFixed(2) }}) will be split among:</p>
 	      <ul>
