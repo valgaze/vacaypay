@@ -16,7 +16,7 @@
     });
     // $scope.stakeholders is the model that the dropdown menu creates.
     $scope.stakeholders = [{id: creatorId, label: creatorUsername}];
-    $scope.currencyModel = {};
+    $scope.currencyModel = {id: 147};
 
     // Configures the dropdown menu
     // http://dotansimha.github.io/angularjs-dropdown-multiselect/#/
