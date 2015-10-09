@@ -2,9 +2,11 @@
   'use strict';
 
   angular.module('app')
-  .controller('CurrentTripController', ['$scope', '$location', '$state', 'Trip', 'Auth',
-  function ($scope, $location, $state, Trip, Auth) {
+  .controller('CurrentTripController', ['$scope', '$location', '$state', 'Trip', 'Auth', '$window',
+  function ($scope, $location, $state, Trip, Auth, $window) {
     $scope.currentTrip = {};
+    $scope.username = $window.localStorage.getItem('username');
+
 
     $scope.logout = function() {
       Auth.signout();
