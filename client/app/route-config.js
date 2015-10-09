@@ -59,7 +59,8 @@
       request: function (object) {
         var jwt = $window.localStorage.getItem('com.vacaypay');
         
-        if (!/^https?:\/\/maps.googleapis.com/.test(object.url)){
+        if (!/(http(s?))\:\/\//gi.test(object.url)){
+
           if (jwt) {
             object.headers['x-access-token'] = jwt;
           }
@@ -86,3 +87,4 @@
     });
   }]);
 })();
+
