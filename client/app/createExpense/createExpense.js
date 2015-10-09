@@ -32,10 +32,11 @@
     };
 
     $scope.addExpense = function () {
+  
       // If the stakeholders model is empty add the creator to the model
       var onSuccess = function (exchangeRateobj){
         console.log("Exchange rate", exchangeRateobj.rate);
-        $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + $scope.expense.location)
+        $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + $scope.expense.locationString)
           .then(function(result){
 
             if (!result.data.results[0]){
@@ -53,7 +54,14 @@
               return { id: stakeholder.id, username: stakeholder.label };
             });
             
+            //Expense String:
+            $scope.expense.expenseString = $scope.expense.amount + " " +$scope.currencyData[$scope.currencyModel.id-1].label;
+            //Conversion
             $scope.expense.amount = $scope.expense.amount*exchangeRateobj.rate;
+
+            // //Location string
+            // $scope.expense.locationString = $scope.expense.location;
+
 
             Expenses.addExpense($scope.expense, $scope.stakeholders, function (tripData) {
               console.log('expense added');

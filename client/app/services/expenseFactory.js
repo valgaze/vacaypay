@@ -24,7 +24,9 @@
         date: expense.date,
         location: expense.location,
         name: expense.name,
-        stakeholders: stakeholders
+        stakeholders: stakeholders,
+        locationString: expense.locationString,
+        expenseString: expense.expenseString
       }).then(function (res) {
         callback(res.data);
       });
