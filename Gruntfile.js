@@ -39,7 +39,7 @@ module.exports = function(grunt) {
             'client/lib/angular-ui-router/release/angular-ui-router.min.js',
             'client/lib/angular-bootstrap/ui-bootstrap.min.js',
             'client/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
-            'client/lib/ngmap/build/ng-map.min.js',
+            'client/lib/ngmap/build/scripts/ng-map.min.js',
             'client/lib/lodash/dist/lodash.min.js',
             'client/lib/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js'
           ],
