@@ -11,6 +11,7 @@
     $scope.hasRecentTrip = false;
     $scope.username = $window.localStorage.getItem('username');
 
+
     $scope.logout = function() {
       Auth.signout();
     };
@@ -49,8 +50,27 @@
           $scope.recentTrip = mostRecentTrip;
           totalExpenses();
           $scope.hasRecentTrip = true;
+          $scope.findCenter();
         }
       });
+    };
+
+    $scope.findCenter = function() {
+      var center = {};
+      center = $scope.recentTrip.expenses.reduce(function(previousValue,currentValue){
+        var result = {
+          location: {
+            lat: previousValue.location.lat+currentValue.location.lat,
+            lng: previousValue.location.lng+currentValue.location.lng
+          }
+        };
+        //console.log(result);
+        return result;
+      });
+      center.location.lat = center.location.lat/$scope.recentTrip.expenses.length;
+      center.location.lng = center.location.lng/$scope.recentTrip.expenses.length;
+      $scope.center = center.location;
+      console.log($scope.center);
     };
 
     var totalExpenses = function() {
