@@ -74,4 +74,7 @@
     </tabset>
 
   </div>
+  <map class="map" center="{{center}}" zoom="4">
+    <marker position="{{expense.location.lat}},{{expense.location.lng}}" title="Hello World!" ng-repeat="expense in recentTrip.expenses"></marker>
+  </map>
 </div>
