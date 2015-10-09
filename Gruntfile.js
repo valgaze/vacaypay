@@ -27,7 +27,9 @@ module.exports = function(grunt) {
             'client/app/services/expenseFactory.js',
             'client/app/services/tripFactory.js',
             'client/app/services/pastTripFactory.js',
-            'client/app/services/currencyFactory.js'
+            'client/app/services/currencyFactory.js',
+            'client/app/services/worldCurrenciesFactory.js'
+
           ],
           dest: 'client/dist/client.js'
         },
