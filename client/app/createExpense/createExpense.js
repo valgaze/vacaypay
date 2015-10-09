@@ -16,7 +16,7 @@
     });
     // $scope.stakeholders is the model that the dropdown menu creates.
     $scope.stakeholders = [{id: creatorId, label: creatorUsername}];
-    $scope.currencyModel = [];
+    $scope.currencyModel = {};
 
     // Configures the dropdown menu
     // http://dotansimha.github.io/angularjs-dropdown-multiselect/#/
@@ -69,7 +69,7 @@
         return;  
       };
 
-      var fromCurrency = $scope.currencyData[$scope.currencyModel - 1].code || 'usd';
+      var fromCurrency = $scope.currencyData[$scope.currencyModel.id - 1].code || 'usd';
       alert("Symbol:" + fromCurrency);
       Currency.getRate(fromCurrency, onSuccess, onError);
     };
@@ -88,8 +88,10 @@
       showUncheckAll: false,
       selectionLimit: 1,
       closeOnSelect: true,
-      smartButtonMaxItems: 1
+      smartButtonMaxItems: 1,
+      enableSearch: true
     };
+
 
     $scope.currencyData = [
       {
