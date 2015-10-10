@@ -55,8 +55,8 @@
       <tab heading="Expenses">
         <div>
           <accordion close-others="oneAtATime">
-            <accordion-group heading="{{ expense.payer.username }} paid for {{expense.name}} {{expense.date !== undefined ? 'on '+ (expense.date|date) : ''}}" ng-repeat="expense in recentTrip.expenses">
-              <p>{{ expense.amount | currency }} was split among:</p>
+            <accordion-group heading="{{ expense.payer.username }} paid for {{expense.name}} {{expense.date !== undefined ? 'on '+ (expense.date|date) : ''}} at {{ expense.locationString }}" ng-repeat="expense in recentTrip.expenses">
+              <p>{{expense.expenseString}} (${{ expense.amount.toFixed(2) }}) was split among:</p>
               <ul>
                 <li ng-repeat="friend in expense.stakeholders">{{ friend.username }}</li>
               </ul>
