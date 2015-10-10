@@ -75,6 +75,12 @@
 
   </div>
   <map class="map" center="{{center}}" zoom="4">
-    <marker position="{{expense.location.lat}},{{expense.location.lng}}" title="Hello World!" ng-repeat="expense in recentTrip.expenses"></marker>
+    <marker position="{{expense.location.lat}},{{expense.location.lng}}" on-click="showInfoWindow(event, 'marker-info')" ng-repeat="expense in recentTrip.expenses"> <info-window id="marker-info">
+          <h4>
+           {{ expense.payer.username }} paid for {{expense.name}} {{expense.date !== undefined ? 'on '+ (expense.date|date) : ''}} at {{ expense.locationString }}
+           <p>{{expense.expenseString}} (${{ expense.amount.toFixed(2) }})</p>
+       </h4>
+      </info-window>
+    </marker>
   </map>
 </div>
