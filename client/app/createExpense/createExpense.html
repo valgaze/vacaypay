@@ -13,7 +13,7 @@
         <label for="expenseAmount" class="col-sm-2 control-label">Cost</label>
         <div class="col-sm-10">
           <div class="input-group">
-            <span class="input-group-addon">$</span>
+            <span class="input-group-addon">{{symbol}}</span>
             <input ng-model="expense.amount" type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" required/>
 
           </div>
