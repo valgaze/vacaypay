@@ -1,7 +1,15 @@
 <div class="expense-list">
 	<button type="button" class="btn expenseBtn" ng-click="open()">Add An Expense</button>
 	<map class="map" center="{{data.center.lat}}, {{data.center.lng}}" zoom="4">
-		<marker position="{{expense.location.lat}},{{expense.location.lng}}" title="Hello World!" ng-repeat="expense in data.expenses"></marker>
+		
+		<marker position="{{expense.location.lat}},{{expense.location.lng}}" on-click="showInfoWindow(event, 'marker-info')" ng-repeat="expense in data.expenses"> <info-window id="marker-info">
+		      <h4>
+		      	{{ expense.payer.username }} paid for {{expense.name}} {{expense.date !== undefined ? 'on '+ (expense.date|date) : ''}} at {{ expense.locationString }}
+		      	<p>{{expense.expenseString}} (${{ expense.amount.toFixed(2) }})</p>
+				</h4>
+		  </info-window>
+		</marker>
+		   
 	</map>
 	<div ng-controller="ExpenseAccordionController">
 				<div class="alert alert-info text-center" ng-hide="data.expenses.length">
