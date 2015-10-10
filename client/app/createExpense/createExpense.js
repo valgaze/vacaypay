@@ -17,6 +17,9 @@
     // $scope.stakeholders is the model that the dropdown menu creates.
     $scope.stakeholders = [{id: creatorId, label: creatorUsername}];
     $scope.currencyModel = {id: 147};
+    $scope.symbol = '$';
+
+
 
     // Configures the dropdown menu
     // http://dotansimha.github.io/angularjs-dropdown-multiselect/#/
@@ -59,8 +62,6 @@
             //Conversion
             $scope.expense.amount = $scope.expense.amount*exchangeRateobj.rate;
 
-            // //Location string
-            // $scope.expense.locationString = $scope.expense.location;
 
 
             Expenses.addExpense($scope.expense, $scope.stakeholders, function (tripData) {
@@ -86,9 +87,8 @@
     };
     $scope.expense.date = new Date();
 
-    /** Currnency Convert Helper **/
+    /** Currency Convert Helper **/
 
-    // $scope.currencyData = [{id: 1, symbol:"EUR", label: 'Euro'}, {id: 2, symbol: "JPY", label: 'Japanese Yen'}, {id: 3, symbol:"CAD", label: 'Canadan Syrup'}];
 
     $scope.currDropdownSettings = {
       showCheckAll: false,
@@ -102,5 +102,9 @@
 
     $scope.currencyData = worldCurrencies.retrieveCurrencies();
 
+    $scope.$watch('currencyModel.id',function(newValue,oldValue){
+      $scope.symbol = $scope.currencyData[$scope.currencyModel.id - 1].symbol;
+      console.log($scope.symbol);
+    });
   }]);
 })();
